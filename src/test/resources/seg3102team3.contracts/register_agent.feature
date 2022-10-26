@@ -1,20 +1,24 @@
-Feature: Register Agent by Administrator.
-    Scenario 1: Administrator registers the agent but information entered are invalid.
-        Given Administrator register the agent
-        When application command Register Patient is invoked
-        Then the System will provide a form asking for Agent information
-        When information are submitted 
-        Then System will check for validity 
-        Given information is invalid
-        Then The System will notify agent to re-enter information until validity
-        When information passes validity 
-        Then System will create an account with specified credential for the agent.
+Feature: Registering an Agent.
+    Scenario: The Administrator is signed into the System, information entered is invalid
+        Given the Administrator is signed in
+        When the Administrator prompts to register an Agent
+        Then the System provides a form asking for the Agent information
+        When the Administrator submits the form
+        Then the System will check the validity of the information in the form 
+        Given the information in the form is invalid
+        Then the System will return the form asking to modify the invalid information
+        When the Administrator submits the form with valid information
+        Then the System will invoke the registerAgent application command
+        And the System creates a new Agent object with the provided information  
+        And the System sets the Agent's account as activated
 
-    Scenario 2: Administrator registers the agent and information entered are valid.
-        Given Administrator register the agent
-        When application command Register Patient is invoked
-        Then the System will provide a form asking for Agent information
-        When information are submitted 
-        Given information entered are valid
-        When information passes validity 
-        Then System will create an account with specified credential for the agent.
+    Scenario: The Administrator is signed into the System, information entered is valid
+        Given the Administrator is signed in
+        When the Administrator prompts to register an Agent
+        Then the System provides a form asking for the Agent information
+        When the Administrator submits the form
+        Then the System will check the validity of the information in the form 
+        Given the information in the form is valid
+        Then the System will invoke the registerAgent application command
+        And the System creates a new Agent object with the provided information  
+        And the System sets the Agent's account as activated

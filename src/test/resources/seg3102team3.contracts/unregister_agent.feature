@@ -1,16 +1,10 @@
-Feature: Unregister Agent by Administrator.
-    Scenario 1: Administor unregisteres agent but agent account could not be found.
-        Given Administor unregisters the agent
-        Then application command UnregisteredAgent will be invoked
-        And system will search for the agent
-        Given Agent Account could not be found in the system
-        Then system will return AgentNotFound status.
-
-
-    Scenario 2: Administor unregisters agent and agent is found .
-        Given Administor unregisters the agent
-        Then application command UnregisteredAgent will be invoked
-        And system will search for the agent
-        Given Agent Account is found in the system
-        Then system will ask for confirmation to Unregistered Agent
-        And system will remove agent from the database of agents in the system.
+Feature: Unregistering an Agent.
+    Scenario: The Administrator is signed into the System
+        Given the Administrator is signed in
+        When the Administrator prompts to un-register an Agent
+        Then the System provides a form for Administrator to select which agent is to be un-registered
+        When the Administrator submits the form
+        Then the System will ask for confirmation
+        When the Administrator provides confirmation 
+        Then the System invokes the unregisterAgent application command
+        And the System sets the Agent's account as deactivated

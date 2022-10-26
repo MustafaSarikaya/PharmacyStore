@@ -1,21 +1,22 @@
-Feature: Update Agent.
-    Scenario 1: Agent needs update but information filled is invalid.
-        Given Agent needs to update information
-        Then application command UpdateAgent will be invoked
-        And the System will create a new form for the agent to fill in new password and email
-        Given Information filled is invalid 
-        When system checks the information entered being invalid 
-        Then system will inform to input the correct format of email and password 
-        And system will check for validity again.
-        When information is valid
-        Then System will update the agent information.
-
-
-
-    Scenario 2: Agent needs update where information filled is valid.
-        Given Agent needs to update information
-        Then application command UpdateAgent will be invoked
-        And the System will create a new form for the agent to fill in new password and email
-        Given Information filled is valid 
-        When information is valid
-        Then System will update the agent information.
+Feature: Updating one's Own Information as an Agent
+    Scenario: Agent is signed into the System, email or password entered into form is invalid
+        Given the Agent is signed into the System
+        When the Agent prompts to update their credentials
+        Then the System will provide a form to edit containing the Agent's current email and password
+        When the Agents submits the form
+        Then the System will check the validitiy of the credentials entered in the form
+        Given the credentials entered are invalid
+        Then the System will return the form and ask the Agent for valid credentials 
+        When the Agent submits the form with valid credentials
+        Then the application command updateAgent is invoked
+        And the System will update the Agent's credentials accordingly
+        
+    Scenario: Agent is signed into the System, email or password entered into form is valid
+        Given the Agent is signed into the System
+        When the Agent prompts to update their credentials
+        Then the System will provide a form to edit containing the Agent's current email and password
+        When the Agents submits the form
+        Then the System will check the validitiy of the credentials entered in the form
+        Given the credentials entered are valid
+        Then the application command updateAgent is invoked
+        And the System will update the Agent's credentials accordingly
