@@ -1,6 +1,14 @@
 package seg3102team3.project.application.dtos.queries
 
-data class AgentDto {
+import java.util.*
+
+data class AgentDto (
+    val agentID: UUID,
+    val name: String,
+    val password: String,
+    val email: String,
+    val activationStatus: Boolean
+    ){
     //todo remember to have a field for activated/unactivated account
     //todo remember to hash passes
 }
