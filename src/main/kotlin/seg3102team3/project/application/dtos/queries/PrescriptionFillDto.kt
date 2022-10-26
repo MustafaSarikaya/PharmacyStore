@@ -1,12 +1,13 @@
 package seg3102team3.project.application.dtos.queries
 
-import java.util.*
+import java.time.LocalDate
+import java.util.UUID
 
 data class PrescriptionFillDto (
     val totalDrugAmount: String,
     val dosageAmount: String,
     val lotNumber: Int,
-    val expiryDate: Date,
+    val expiryDate: LocalDate,
     val patientID: UUID,
     val pickUpSummary: String,
     val verification: Boolean,
