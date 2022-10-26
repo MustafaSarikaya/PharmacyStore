@@ -1,13 +1,8 @@
 package seg3102team3.project.application.dtos.queries
 
-import java.util.*
-
 data class AgentDto (
-    val name: String,
-    val password: String,
+    val fullName: String,
+    val username: String,
     val email: String,
-    val activationStatus: Boolean
-    ){
-    //todo remember to have a field for activated/unactivated account
-    //todo remember to hash passes
-}
+    val password: String, //business logic will hash the password before storing in Agent domain entity
+    val pharmacist: Boolean) //if true, created domain entity is Pharmacist, else Agent (assistant)

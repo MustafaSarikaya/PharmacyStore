@@ -4,15 +4,7 @@ import java.time.LocalDate
 import java.util.UUID
 
 data class PrescriptionFillDto (
-    val totalDrugAmount: String,
-    val dosageAmount: String,
+    val prescriptionID: UUID,
     val lotNumber: Int,
     val expiryDate: LocalDate,
-    val patientID: UUID,
-    val pickUpSummary: String,
-    val verification: Boolean,
-    val verifierID: UUID,
-) {
-    var prescriptionInfo: PrescriptionDto? = null
-    //todo remember to add the pick-up summary string
-}
+    val status: String) //this matches to an PrescriptionFillStatus enum (Prepared/Verified/Retrieved/Cancelled) defined in the prescription subdomain
