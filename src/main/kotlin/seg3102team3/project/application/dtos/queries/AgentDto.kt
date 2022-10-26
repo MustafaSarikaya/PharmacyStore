@@ -3,7 +3,6 @@ package seg3102team3.project.application.dtos.queries
 import java.util.*
 
 data class AgentDto (
-    val agentID: UUID,
     val name: String,
     val password: String,
     val email: String,
