@@ -1,3 +1,0 @@
-# Staff UI
-
-The subdomain for Staff UI provides the functionality enabling all users to log in to and interact with the website. All of the necessary **web-server logic** which supplies our application's UI to users of the system (guests, staff and administrators) will be found here. Upon authentication, a **Session** object will enable the User to navigate the application depending on access rules associated with their User role and identity. Sessions are automatically closed upon client disconnection to maximize data security (forcing users to authenticate once more in the following session). For the same reason, Sessions are automatically closed after 60 minutes of session inactivity.
