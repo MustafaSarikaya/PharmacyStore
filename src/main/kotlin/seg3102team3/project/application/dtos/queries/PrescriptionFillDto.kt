@@ -8,8 +8,10 @@ data class PrescriptionFillDto (
     val lotNumber: Int,
     val expiryDate: Date,
     val patientID: UUID,
-    val pickUpSummary: String
-        ) {
+    val pickUpSummary: String,
+    val verification: Boolean,
+    val verifierID: UUID,
+) {
     var prescriptionInfo: PrescriptionDto? = null
     //todo remember to add the pick-up summary string
 }
