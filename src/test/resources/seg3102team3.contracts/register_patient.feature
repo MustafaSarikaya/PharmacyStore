@@ -12,7 +12,6 @@ Feature: Register Patient by Pharmacist.
         When the business logic of the System processes the registerPatient application command
         Then the System will create the Patient object
         And add the Patient object to its list of Patients
-        And the System will allow Prescriptions to be filled for the Patient
 
     Scenario 2: Pharmacist is signed into the System, Information entered into form is valid
         Given Pharmacist is signed into System
@@ -25,4 +24,3 @@ Feature: Register Patient by Pharmacist.
         When the business logic of the System processes the registerPatient application command
         Then the System will create the Patient object
         And add the Patient object to its list of Patients
-        And the System will allow Prescriptions to be filled for the Patient
