@@ -11,7 +11,7 @@ Feature: Create Prescription.
         Then System will prompt Agent to modify the entered information
         When the Agent submits the form with valid information
         Then the System invokes the createPrescription application command
-        And System assign unique identifer to prescription 
+        And System assign unique identifier to prescription
         And System record prescription
         And System adds prescription to the patient prescription
 
@@ -25,7 +25,7 @@ Feature: Create Prescription.
         And System checks if patient information matches a registered patient
         Given that all the information is valid
         Then the System invokes the createPrescription application command
-        And System assign unique identifer to prescription 
+        And System assign unique identifier to prescription
         And System record prescription
         And System adds prescription to the patient prescription
 

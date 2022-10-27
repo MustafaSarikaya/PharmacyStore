@@ -5,4 +5,4 @@ data class AgentDto (
     val username: String,
     val email: String,
     val password: String, //business logic will hash the password before storing in Agent domain entity
-    val pharmacist: Boolean) //if true, created domain entity is Pharmacist, else Agent (assistant)
+    val pharmacist: Boolean) //if true, (re)created domain entity is Pharmacist, else Agent (assistant)

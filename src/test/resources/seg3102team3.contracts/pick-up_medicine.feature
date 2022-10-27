@@ -5,6 +5,7 @@ Feature: Pick Up Prepared Prescription Fill
         Given the Prescription Fill to be picked up exists
         Then the System provides a form asking for the summary of the discussion
         When the Pharmacist submits the form
-        Then the System invokes pickUpMedicine application comamnd
+        Then the System invokes pickUpMedicine application command
         And the System sets the Prescription Fill's pick-up summary to the provided value
         And the System sets the Prescription Fill's status to Retrieved
+        And the System sets the Prescription Fill's operating agent ID for retrieval to the Pharmacist's
