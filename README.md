@@ -1,6 +1,6 @@
 # SEG3102 Project Repository - Team 3
 
-**Current deliverable**: Deliverable 1 *(Initial Domain)*
+**Branch deliverable**: Deliverable 2 *(Domain)*
 
 Project JDK: 19 (19.0.1; vendor: Oracle OpenJDK)<br>
 Language Level: 17<br>
