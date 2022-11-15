@@ -7,6 +7,8 @@ import java.util.UUID
 class PrescriptionFill(val id: UUID,
                        val lotNumber: UInt,
                        val expiryDate: LocalDate,
-                       val status: PrescriptionFillStatus
+                       var status: PrescriptionFillStatus,
+                       var pickUpSummary: String?,
+                       var clinicalCheck: String?
 ) {
 }

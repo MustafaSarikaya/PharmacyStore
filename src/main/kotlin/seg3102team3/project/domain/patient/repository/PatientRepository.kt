@@ -6,4 +6,7 @@ import java.util.*
 interface PatientRepository {
         fun save(patient: Patient): Patient
         fun find(id: UUID): Patient?
+        fun find(searchKey: String): Patient?
+
+        fun update(patient: Patient): Patient
 }

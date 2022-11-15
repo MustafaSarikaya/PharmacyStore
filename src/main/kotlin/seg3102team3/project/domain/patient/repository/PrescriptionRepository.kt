@@ -5,6 +5,6 @@ import seg3102team3.project.domain.patient.entities.Prescription
 import java.util.*
 
 interface PrescriptionRepository {
-    fun save(prescription: Prescription): Prescription
+    fun save(patientId: String, prescription: Prescription): Prescription
     fun find(id: UUID): Prescription?
 }
