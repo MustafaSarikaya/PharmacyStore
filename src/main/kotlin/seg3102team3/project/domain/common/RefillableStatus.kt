@@ -2,7 +2,7 @@ package seg3102team3.project.domain.common
 
 enum class status {
     REFILLABLE,
-    REFILLABLE_WITH_REAUTHORIZATION,
+    REFILLABLE_WITH_REAUTH,
     NON_REFILLABLE
 }
 
