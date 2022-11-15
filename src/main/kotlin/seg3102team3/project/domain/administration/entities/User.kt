@@ -19,4 +19,22 @@ class User(
     fun setLanguage(language: Language) {
         this.language = language
     }
+
+    fun setGender(gender: Gender) {
+        this.gender = gender
+    }
+
+    fun setRole(userRole: UserRole) {
+        this.role = userRole
+    }
+
+    fun update(agent: User) {
+        this.userName = agent.userName
+        this.name = agent.name
+    }
+
+    fun updateDetails(email: String, password: String) {
+        this.email = email
+        this.password = password
+    }
 }
