@@ -1,8 +1,7 @@
 package seg3102team3.project.domain.common
 
-enum class fillStatus {
+enum class PrescriptionFillStatus {
     RETRIEVED,
     CANCELLED,
 }
 
-data class PrescriptionFillStatus(val fillStatus: fillStatus)
