@@ -23,7 +23,7 @@ class AgentFacadeImpl (
     }
     
     override fun getAgent(agentID: UUID): User? {
-        val agent = userRepository.get(agentID)
+        val agent = userRepository.find(agentID)
         if (agent != null) {
             return agent
         }
