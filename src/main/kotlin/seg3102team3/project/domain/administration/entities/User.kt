@@ -11,6 +11,7 @@ class User(
     val password: String,
     val name: Name
 ) {
+    var activated : Boolean = true
     var passwordTemporary: Boolean = true
     var language: Language = null
     var role: UserRole = null
@@ -36,5 +37,18 @@ class User(
     fun updateDetails(email: String, password: String) {
         this.email = email
         this.password = password
+    }
+
+    fun setFirstPassword(password: String) {
+        this.password = password
+        passwordTemporary = false
+    }
+
+    fun setTempPassword(password: String) {
+        this.password = password
+    }
+
+    fun deactivate() {
+        this.activated = false;
     }
 }

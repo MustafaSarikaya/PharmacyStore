@@ -44,8 +44,7 @@ class AgentFacadeImpl (
     override fun unregisterAgent(agentID: UUID) {
         val agent = userRepository.find(agentID)
         if (agent != null) {
-            agent = null
-            
+            agent.deactivate()
         }
     }
 }
