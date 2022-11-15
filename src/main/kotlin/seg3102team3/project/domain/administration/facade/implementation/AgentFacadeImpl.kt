@@ -21,6 +21,11 @@ class AgentFacadeImpl (
         eventEmitter.emit(NewAgentCreated(UUID.randomUUID(), Date(), agent.id))
         return agent.id
     }
+    
+    override fun getAgent(agentID: UUID): User? {
+        val agent = userRepository.find(agentID)
+        return agent
+    }
 
     override fun updateAgent(agentID: UUID, agentInfo: AgentDto) {
         val agent = userRepository.find(agentID)
