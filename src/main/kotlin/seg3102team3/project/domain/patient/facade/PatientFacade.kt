@@ -1,4 +1,4 @@
-package seg3102team3.project.domain.administration.patient.facade
+package seg3102team3.project.domain.patient.facade
 
 import seg3102team3.project.application.dtos.queries.PatientDto;
 import seg3102team3.project.application.dtos.queries.PrescriptionDto;

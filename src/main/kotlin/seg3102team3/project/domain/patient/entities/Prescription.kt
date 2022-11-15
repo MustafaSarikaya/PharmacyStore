@@ -1,4 +1,4 @@
-package seg3102team3.project.domain.administration.patient.entities
+package seg3102team3.project.domain.patient.entities
 
 import java.util.UUID;
 import java.time.LocalDate;

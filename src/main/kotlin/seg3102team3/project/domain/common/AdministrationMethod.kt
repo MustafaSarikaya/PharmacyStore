@@ -9,4 +9,3 @@ enum class adminMethod {
     TOPICAL
 }
 
-data class AdministrationMethod(val adminMethod: adminMethod)
