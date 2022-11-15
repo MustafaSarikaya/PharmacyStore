@@ -21,6 +21,13 @@ class AgentFacadeImpl (
         eventEmitter.emit(NewAgentCreated(UUID.randomUUID(), Date(), agent.id))
         return agent.id
     }
+    
+    override fun getAgent(agentID: UUID): User? {
+        val agent = userRepository.get(agentID)
+        if (agent != null) {
+            return agent
+        }
+    }
 
     override fun updateAgent(agentID: UUID, agentInfo: AgentDto) {
         val agent = userRepository.find(agentID)
@@ -30,6 +37,7 @@ class AgentFacadeImpl (
             agent.userName = tempAgent.userName
             agent.language = tempAgent.language
             agent.role = tempAgent.role
+            eventEmitter.emit(AgentUpdated(UUID.randomUUID(), Date(), agent.id))
         }
     }
 
@@ -38,6 +46,7 @@ class AgentFacadeImpl (
         if (agent != null) {
             agent.email = email
             agent.password = password
+            eventEmitter.emit(AgentUpdated(UUID.randomUUID(), Date(), agent.id))
         }
     }
 
@@ -45,6 +54,7 @@ class AgentFacadeImpl (
         val agent = userRepository.find(agentID)
         if (agent != null) {
             agent.deactivate()
+            eventEmitter.emit(AgentRemoved(UUID.randomUUID(), Date(), agent.id))
         }
     }
 }
