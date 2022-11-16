@@ -1,3 +1,5 @@
+package seg3102team3.project.domain.drug.entities
+
 class Drug(
         val id: UInt,
         var name: String,

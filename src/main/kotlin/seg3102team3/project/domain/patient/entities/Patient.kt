@@ -1,8 +1,8 @@
 package seg3102team3.project.domain.patient.entities
-import Address
-import Gender
-import Language
-import Name
+import seg3102team3.project.domain.common.Address
+import seg3102team3.project.domain.common.Gender
+import seg3102team3.project.domain.common.LanguagePreference
+import seg3102team3.project.domain.common.Name
 import java.util.*
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ class Patient(val id: String,
               val insuranceNumber: String,
               val patient: Prescription,
               val fullName: Name,
-              val languagePref: Language,
+              val languagePref: LanguagePreference,
               val genderType: Gender,
               val address: Address
 )

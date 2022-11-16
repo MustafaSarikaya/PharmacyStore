@@ -1,4 +1,4 @@
-package seg3102team3.project.domain.common
+package seg3102team3.project.domain.patient.entities
 
 enum class PrescriptionFillStatus {
     RETRIEVED,

@@ -1,3 +1,8 @@
+package seg3102team3.project.domain.patient.facade.implementation
+
+import seg3102team3.project.domain.drug.facade.DrugFacade
+import seg3102team3.project.domain.drug.services.DrugProductDatabaseAdaptor
+
 class DrugFacadeImpl(val drugDB: DrugProductDatabaseAdaptor) : DrugFacade {
 
     override fun identifyDrugByName(name: String): UInt? {

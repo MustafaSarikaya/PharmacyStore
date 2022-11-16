@@ -4,9 +4,8 @@ import seg3102team3.project.application.dtos.queries.PatientDto
 import seg3102team3.project.application.dtos.queries.PrescriptionDto
 import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
 import seg3102team3.project.application.services.DomainEventEmitter
-import seg3102team3.project.domain.common.PrescriptionFillStatus
+import seg3102team3.project.domain.patient.entities.PrescriptionFillStatus
 import seg3102team3.project.domain.patient.entities.Patient
-import seg3102team3.project.domain.patient.entities.PrescriptionFill
 import seg3102team3.project.domain.patient.facade.PatientFacade
 import seg3102team3.project.domain.patient.factory.PatientFactory
 import seg3102team3.project.domain.patient.factory.PrescriptionFactory
@@ -44,7 +43,7 @@ class PatientFacadeImpl (
 //        eventEmitter.emit()
     }
 
-    override fun updatePatient(patientInfo: PatientDto) {
+    override fun updatePatient(patientID: String, patientInfo: PatientDto) {
         val patient = patientFactory.createPatient(patientInfo)
         patientRepository.update(patient)
 //        eventEmitter.emit()
@@ -62,10 +61,11 @@ class PatientFacadeImpl (
         return patientRepository.find(phin)
     }
 
-    override fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): String {
+    override fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): UInt? {
         val prescriptionFill = prescriptionFillRepository.find(prescriptionFillID)
-//        return prescriptionFill.
-        return ""
+        val prescription = prescriptionFill?.prescriptionID?.let { prescriptionRepository.find(it) }
+        val DIN = prescription?.drugIdentificationNumber
+        return DIN
     }
 
     override fun pickUpPrescriptionFill(prescriptionFillID: UUID, agentID: UUID, pickUpSummary: String) {

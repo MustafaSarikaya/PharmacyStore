@@ -1,24 +1,26 @@
-package seg3102team3.project.domain.administration.facade.implementation
+package seg3102team3.project.domain.agent.facade.implementation
 
 import seg3102team3.project.application.dtos.queries.AgentDto
-import seg3102team3.project.domain.administration.repositories.UserRepository
-import seg3102team3.project.domain.administration.factories.AgentFactory
+import seg3102team3.project.domain.agent.repositories.UserRepository
+import seg3102team3.project.domain.agent.factories.UserFactory
 import seg3102team3.project.application.services.DomainEventEmitter
-import seg3102team3.project.domain.administration.events.NewAgentCreated
-import seg3102team3.project.domain.administration.events.AgentUpdated
-import seg3102team3.project.domain.administration.events.AgentRemoved
+import seg3102team3.project.domain.agent.entities.User
+import seg3102team3.project.domain.agent.events.NewAgentAdded
+import seg3102team3.project.domain.agent.events.AgentUpdated
+import seg3102team3.project.domain.agent.events.AgentRemoved
+import seg3102team3.project.domain.agent.facade.AgentFacade
 import java.util.*
 
 class AgentFacadeImpl (
-        var userRepository: UserRepository,
-        var agentFactory: AgentFactory,
-        var eventEmitter: DomainEventEmitter
+    var userRepository: UserRepository,
+    var userFactory: UserFactory,
+    var eventEmitter: DomainEventEmitter
     ): AgentFacade {
 
     override fun addAgent(agentInfo: AgentDto): UUID {
-        val agent = agentFactory.createAgent(agentInfo)
+        val agent = userFactory.createAgent(agentInfo)
         userRepository.save(agent)
-        eventEmitter.emit(NewAgentCreated(UUID.randomUUID(), Date(), agent.id))
+        eventEmitter.emit(NewAgentAdded(UUID.randomUUID(), Date(), agent.id))
         return agent.id
     }
     
@@ -30,7 +32,7 @@ class AgentFacadeImpl (
     override fun updateAgent(agentID: UUID, agentInfo: AgentDto) {
         val agent = userRepository.find(agentID)
         if (agent != null) {
-            val tempAgent = agentFactory.addAgent(agentInfo)
+            val tempAgent = userFactory.createAgent(agentInfo)
             agent.name = tempAgent.name
             agent.userName = tempAgent.userName
             agent.language = tempAgent.language

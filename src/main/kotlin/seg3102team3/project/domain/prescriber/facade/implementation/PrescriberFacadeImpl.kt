@@ -1,3 +1,9 @@
+package seg3102team3.project.domain.prescriber.facade.implementation
+
+import seg3102team3.project.domain.prescriber.facade.PrescriberFacade
+import seg3102team3.project.domain.prescriber.services.PrescriberRegistryAdaptor
+
+
 class PrescriberFacadeImpl(val prescriberRepository: PrescriberRegistryAdaptor) : PrescriberFacade {
 
     override fun identifyPrescriberByName(name: String): String? {

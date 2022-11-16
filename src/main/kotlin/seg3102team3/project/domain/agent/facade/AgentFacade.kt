@@ -1,11 +1,13 @@
-package seg3102team3.project.domain.administration.facade
+package seg3102team3.project.domain.agent.facade
 
 import seg3102team3.project.application.dtos.queries.AgentDto
+import seg3102team3.project.domain.agent.entities.User
+import java.util.*
 
 interface AgentFacade {
     fun addAgent(agentInfo: AgentDto) : UUID
     fun getAgent(agentID: UUID) : User?
-    fun updateAgent(agentInfo: AgentDto)
     fun updateAgentCredentials(agentID: UUID, email: String, password: String)
+    fun updateAgent(agentID: UUID, agentInfo: AgentDto)
     fun unregisterAgent(agentID: UUID)
 }

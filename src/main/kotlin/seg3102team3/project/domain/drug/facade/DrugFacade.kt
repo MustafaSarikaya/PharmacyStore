@@ -1,3 +1,5 @@
+package seg3102team3.project.domain.drug.facade
+
 interface DrugFacade {
     fun identifyDrugByName(name: String): UInt?
     fun identifyDrugByDIN(din: UInt): UInt?

@@ -1,3 +1,4 @@
-# Patient 
+## Patient Sub-Domain
 
-The subdomain relating to Patients contains core medical entities like **Prescription**, **Prescription Fill** and **Patient**. It also contains enums for the various statuses and attributes of Prescriptions and Prescription Fills. It contains most of the **application server** logic which supports both all non-user-related application commands and persistent redundant storage of medical information (see `administration/README.md` for more on how this might be done — perhaps both servers could run in tandem or as one).
+- Core
+- Patients, Prescriptions and PrescriptionFills
