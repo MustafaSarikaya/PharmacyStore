@@ -14,7 +14,7 @@ interface PatientFacade {
     fun identifyPatientByName(name: String): Patient?
     fun identifyPatientByEmail(email: String): Patient?
     fun identifyPatientByPHIN(phin: String): Patient?
-    fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): String
+    fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): UInt?
     fun pickUpPrescriptionFill(prescriptionFillID: UUID, agentID: UUID, pickUpSummary: String)
     fun verifyPatientIdentifier(someIdentifier: String):Patient?
     fun verifyPrescriptionFill(prescriptionFillID: UUID, pharmacistID: UUID, clinicalCheck: String)

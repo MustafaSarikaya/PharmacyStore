@@ -62,10 +62,11 @@ class PatientFacadeImpl (
         return patientRepository.find(phin)
     }
 
-    override fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): String {
+    override fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): UInt? {
         val prescriptionFill = prescriptionFillRepository.find(prescriptionFillID)
-//        return prescriptionFill.
-        return ""
+        val prescription = prescriptionFill?.presriptionID?.let { prescriptionRepository.find(it) }
+        val DIN = prescription?.drugIdentificationNumber
+        return DIN
     }
 
     override fun pickUpPrescriptionFill(prescriptionFillID: UUID, agentID: UUID, pickUpSummary: String) {
