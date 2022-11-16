@@ -1,21 +1,22 @@
 package seg3102team3.project.domain.administration.entities
 
-import seg3102team3.project.domain.common.Language
-import seg3102team3.project.domain.common.Gender
-import seg3102team3.project.domain.common.Name
+import Gender
+import Language
+import Name
+import java.util.UUID
 
 class User(
-    val id: UUID,
-    val userName: String,
-    val email: String,
-    val password: String,
-    val name: Name
+        val id: UUID,
+        var userName: String,
+        var email: String,
+        var password: String,
+        var name: Name
 ) {
-    var activated : Boolean = true
+    var activated: Boolean = true
     var passwordTemporary: Boolean = true
-    var language: Language = null
-    var role: UserRole = null
-    var gender: Gender = null
+    var language: Language? = null
+    var role: UserRole? = null
+    var gender: Gender? = null
 
     fun setLanguage(language: Language) {
         this.language = language
@@ -49,6 +50,6 @@ class User(
     }
 
     fun deactivate() {
-        this.activated = false;
+        this.activated = false
     }
 }
