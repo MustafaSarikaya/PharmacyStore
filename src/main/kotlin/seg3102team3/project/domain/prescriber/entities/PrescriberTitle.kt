@@ -1,4 +1,6 @@
-enum class TitleName {
+package seg3102team3.project.domain.prescriber.entities
+
+enum class PrescriberTitle {
     DOCTOR,
     DENTIST,
     NURSE,
@@ -6,5 +8,3 @@ enum class TitleName {
     PODIATRIST
     // List from initial requirements
 }
-
-data class PrescriberTitle(val titleName: TitleName)

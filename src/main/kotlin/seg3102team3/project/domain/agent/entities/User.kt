@@ -1,8 +1,8 @@
-package seg3102team3.project.domain.administration.entities
+package seg3102team3.project.domain.agent.entities
 
-import Gender
-import Language
-import Name
+import seg3102team3.project.domain.common.Name;
+import seg3102team3.project.domain.common.LanguagePreference;
+import seg3102team3.project.domain.common.Gender;
 import java.util.UUID
 
 class User(
@@ -14,21 +14,9 @@ class User(
 ) {
     var activated: Boolean = true
     var passwordTemporary: Boolean = true
-    var language: Language? = null
+    var language: LanguagePreference? = null
     var role: UserRole? = null
     var gender: Gender? = null
-
-    fun setLanguage(language: Language) {
-        this.language = language
-    }
-
-    fun setGender(gender: Gender) {
-        this.gender = gender
-    }
-
-    fun setRole(userRole: UserRole) {
-        this.role = userRole
-    }
 
     fun update(agent: User) {
         this.userName = agent.userName
