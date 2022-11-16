@@ -44,7 +44,7 @@ class PatientFacadeImpl (
 //        eventEmitter.emit()
     }
 
-    override fun updatePatient(patientInfo: PatientDto) {
+    override fun updatePatient(patientID: String, patientInfo: PatientDto) {
         val patient = patientFactory.createPatient(patientInfo)
         patientRepository.update(patient)
 //        eventEmitter.emit()
