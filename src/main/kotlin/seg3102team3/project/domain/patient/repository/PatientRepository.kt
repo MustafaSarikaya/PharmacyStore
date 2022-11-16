@@ -8,5 +8,5 @@ interface PatientRepository {
         fun find(id: UUID): Patient?
         fun find(searchKey: String): Patient?
 
-        fun update(patient: Patient): Patient
+        fun updatePatient(patient: Patient): Patient
 }

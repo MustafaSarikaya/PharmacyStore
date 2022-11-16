@@ -10,7 +10,7 @@ interface PatientFacade {
     fun addPatient(patientInfo: PatientDto)
     fun addPrescription(patientId: String, prescriptionInfo: PrescriptionDto)
     fun addPrescriptionFill(prescriptionFillInfo: PrescriptionFillDto, agentID: UUID)
-    fun updatePatient(patientInfo: PatientDto)
+    fun updatePatient(patientID: String, patientInfo: PatientDto)
     fun identifyPatientByName(name: String): Patient?
     fun identifyPatientByEmail(email: String): Patient?
     fun identifyPatientByPHIN(phin: String): Patient?
