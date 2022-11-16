@@ -2,13 +2,15 @@ package seg3102team3.project.application.usecases.implementation
 
 import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
 import seg3102team3.project.application.usecases.PreparePrescriptionFill
+import seg3102team3.project.domain.drug.facade.DrugFacade
 import seg3102team3.project.domain.patient.facade.PatientFacade
 import seg3102team3.project.domain.prescriber.facade.PrescriberFacade
 import java.util.*
 
 class PreparePrescriptionFillImpl(
     private var patientFacade: PatientFacade,
-    private var prescriberFacade: PrescriberFacade): PreparePrescriptionFill {
+    private var prescriberFacade: PrescriberFacade,
+    private var drugFacade: DrugFacade): PreparePrescriptionFill {
 
     override fun preparePrescriptionFill(prescriptionFillInfo: PrescriptionFillDto, agentID: UUID): UUID? {
         var uuid: UUID? = patientFacade.addPrescriptionFill(prescriptionFillInfo, agentID)
@@ -26,10 +28,14 @@ class PreparePrescriptionFillImpl(
         clinicalCheck: String,
         verification: Boolean
     ): Boolean {
-        TODO("Not yet implemented")
+        var result: Boolean = patientFacade.verifyPrescriptionFill(prescriptionFillID, pharmacistID, clinicalCheck, verification)
+        return result
     }
 
-    override fun fetchPrescriptionDocs(prescriptionFillID: UUID): ByteArray {
-        TODO("Not yet implemented")
+    override fun fetchPrescriptionDocs(prescriptionFillID: UUID): ByteArray? {
+        var din: UInt? = patientFacade.fetchPrescriptionFillDIN(prescriptionFillID);
+        if(din == null) return null
+        var documents: Array<ByteArray> = drugFacade.fetchDrugDocuments(din)
+        return documents;
     }
 }
