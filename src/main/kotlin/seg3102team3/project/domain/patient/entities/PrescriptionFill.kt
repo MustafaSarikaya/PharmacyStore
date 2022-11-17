@@ -14,4 +14,10 @@ class PrescriptionFill(val id: UUID,
     var checkPharmacistID: UUID? = null
     var retrievalPharmacistID: UUID? = null
     lateinit var prescription: Prescription
+
+    fun pickUp(pharmacistID: UUID, summary: String) {
+        retrievalPharmacistID = pharmacistID
+        pickUpSummary = summary
+        status = PrescriptionFillStatus.RETRIEVED
+    }
 }

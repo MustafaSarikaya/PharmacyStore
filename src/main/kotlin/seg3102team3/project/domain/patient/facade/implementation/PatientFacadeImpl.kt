@@ -6,27 +6,19 @@ import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
 import seg3102team3.project.application.services.DomainEventEmitter
 import seg3102team3.project.domain.patient.entities.PrescriptionFillStatus
 import seg3102team3.project.domain.patient.entities.Patient
-import seg3102team3.project.domain.patient.events.NewPatientAdded
-import seg3102team3.project.domain.patient.events.NewPrescriptionAdded
-import seg3102team3.project.domain.patient.events.NewPrescriptionFillAdded
-import seg3102team3.project.domain.patient.events.PatientUpdated
+import seg3102team3.project.domain.patient.events.*
 import seg3102team3.project.domain.patient.facade.PatientFacade
 import seg3102team3.project.domain.patient.factory.PatientFactory
 import seg3102team3.project.domain.patient.factory.PrescriptionFactory
 import seg3102team3.project.domain.patient.factory.PrescriptionFillFactory
 import seg3102team3.project.domain.patient.repository.PatientRepository
-import seg3102team3.project.domain.patient.repository.PrescriptionFillRepository
-import seg3102team3.project.domain.patient.repository.PrescriptionRepository
-import java.time.LocalDateTime
 import java.util.*
 
 class PatientFacadeImpl (
-    private var patientFactory: PatientFactory,
     private var patientRepository: PatientRepository,
+    private var patientFactory: PatientFactory,
     private var prescriptionFactory: PrescriptionFactory,
-    private var prescriptionRepository: PrescriptionRepository,
     private var prescriptionFillFactory: PrescriptionFillFactory,
-    private var prescriptionFillRepository: PrescriptionFillRepository,
     private var eventEmitter: DomainEventEmitter
 ): PatientFacade {
 
@@ -90,18 +82,27 @@ class PatientFacadeImpl (
     }
 
     override fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): UInt? {
-        val prescriptionFill = prescriptionFillRepository.find(prescriptionFillID)
-        val prescription = prescriptionFill?.prescription?.let { prescriptionRepository.find(it.id) }
-        val DIN = prescription?.drugIdentificationNumber
+        val patient = patientRepository.findByPrescriptionFillID(prescriptionFillID)
+        if(patient == null) return null
+
+        val fill = patient.getPrescriptionFill(prescriptionFillID)
+        if(fill == null) return null
+
+        val DIN = fill.prescription.drugIdentificationNumber
         return DIN
     }
 
-    override fun pickUpPrescriptionFill(prescriptionFillID: UUID, agentID: UUID, pickUpSummary: String): Boolean {
-        val prescriptionFill = prescriptionFillRepository.find(prescriptionFillID)
+    override fun pickUpPrescriptionFill(prescriptionFillID: UUID, pharmacistID: UUID, pickUpSummary: String): Boolean {
+        val patient = patientRepository.findByPrescriptionFillID(prescriptionFillID)
+        if(patient == null) return false
+
+        val prescriptionFill = patient.getPrescriptionFill(prescriptionFillID)
         if(prescriptionFill == null) return false
-        prescriptionFill.status = PrescriptionFillStatus.RETRIEVED
-        prescriptionFill.pickUpSummary = pickUpSummary
-        prescriptionFillRepository.update(prescriptionFill, agentID)
+
+        prescriptionFill.pickUp(pharmacistID, pickUpSummary)
+
+        patientRepository.save(patient)
+        eventEmitter.emit(PrescriptionFillPickedUp(prescriptionFill.id, Date()))
         return true
     }
 
@@ -110,13 +111,17 @@ class PatientFacadeImpl (
     }
 
     override fun verifyPrescriptionFill(prescriptionFillID: UUID, pharmacistID: UUID, clinicalCheck: String, verification: Boolean): Boolean {
-        val prescriptionFill = prescriptionFillRepository.find(prescriptionFillID)
+        val patient = patientRepository.findByPrescriptionFillID(prescriptionFillID)
+        if(patient == null) return false
+
+        val prescriptionFill = patient.getPrescriptionFill(prescriptionFillID)
         if(prescriptionFill == null) return false
 
         prescriptionFill.status = if(verification) PrescriptionFillStatus.VERIFIED else PrescriptionFillStatus.CANCELLED
         prescriptionFill.clinicalCheck = clinicalCheck
-        prescriptionFillRepository.update(prescriptionFill, pharmacistID)
 
+        patientRepository.save(patient)
+        eventEmitter.emit(PrescriptionFillVerified(prescriptionFill.id, Date()))
         return true
     }
 

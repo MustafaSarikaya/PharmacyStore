@@ -1,12 +1,11 @@
 package seg3102team3.project.domain.patient.entities
 import seg3102team3.project.application.dtos.queries.PatientDto
-import seg3102team3.project.domain.agent.entities.User
 import seg3102team3.project.domain.common.Address
 import seg3102team3.project.domain.common.Gender
 import seg3102team3.project.domain.common.LanguagePreference
 import seg3102team3.project.domain.common.Name
 import java.util.*
-import java.time.LocalDate;
+import java.time.LocalDate
 
 class Patient(
     var id: String,
@@ -49,6 +48,13 @@ class Patient(
     fun getPrescription(prescriptionID: UUID): Prescription? {
         for(prescription in prescriptions)
             if(prescription.id == prescriptionID) return prescription
+        return null
+    }
+
+    fun getPrescriptionFill(prescriptionFillID: UUID): PrescriptionFill? {
+        for(prescription in prescriptions)
+            for(fill in prescription.fills)
+                if(fill.id == prescriptionFillID) return fill
         return null
     }
 }

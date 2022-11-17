@@ -33,13 +33,21 @@ class PatientRepositoryStub : PatientRepository {
     }
 
     override fun findByPrescriptionID(id: UUID): Patient? {
-        for((_, v1) in patients)
-            for(prescription in v1.prescriptions)
-                if(prescription.id == id) return v1
+        for((_, patient) in patients)
+            for(prescription in patient.prescriptions)
+                if(prescription.id == id) return patient
+        return null
+    }
+
+    override fun findByPrescriptionFillID(id: UUID): Patient? {
+        for((_, patient) in patients)
+            for(prescription in patient.prescriptions)
+                for(fill in prescription.fills)
+                    if(fill.id == id) return patient
         return null
     }
 
     override fun update(patient: Patient): Patient {
-        return save(patient); //equivalent
+        return save(patient) //equivalent
     }
 }

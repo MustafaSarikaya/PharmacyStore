@@ -7,8 +7,8 @@ import java.util.*
 class PickUpMedicineImpl(
     private var patientFacade: PatientFacade): PickUpMedicine {
 
-    override fun pickUpMedicine(prescriptionFillId: UUID, pharmacistID: UUID, pickUpSummary: String): Boolean {
-        var success: Boolean = patientFacade.pickUpPrescriptionFill(prescriptionFillId, pharmacistID, pickUpSummary)
+    override fun pickUpMedicine(prescriptionFillID: UUID, pharmacistID: UUID, pickUpSummary: String): Boolean {
+        val success: Boolean = patientFacade.pickUpPrescriptionFill(prescriptionFillID, pharmacistID, pickUpSummary)
         return success
     }
 }

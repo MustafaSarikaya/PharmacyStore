@@ -9,5 +9,6 @@ interface PatientRepository {
         fun findByName(name: String): Patient?
         fun findByEmail(email: String): Patient?
         fun findByPrescriptionID(id: UUID): Patient?
+        fun findByPrescriptionFillID(id: UUID): Patient?
         fun update(patient: Patient): Patient
 }
