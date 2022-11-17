@@ -1,3 +1,4 @@
+//TO REDO LATER FOR BDD; RAN OUT OF TIME
 Feature: Registering a Patient.
     Scenario: Pharmacist is signed into the System, Information entered into form is invalid
         Given Pharmacist is signed into System

@@ -1,3 +1,4 @@
+//TO REDO LATER FOR BDD; RAN OUT OF TIME
 Feature: Unregistering an Agent.
     Scenario: The Administrator is signed into the System
         Given the Administrator is signed in

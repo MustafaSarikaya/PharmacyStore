@@ -1,4 +1,5 @@
-Feature: Assessing and Verifying a Prescription Fill 
+//TO REDO LATER FOR BDD; RAN OUT OF TIME
+Feature: Assessing and Verifying a Prescription Fill
     Scenario: Pharmacist is signed in and Prescription Fill awaiting verification exists and the assessment is positive
         Given the Pharmacist is signed in 
         And a Prescription Fill is awaiting verification
