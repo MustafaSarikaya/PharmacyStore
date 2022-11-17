@@ -7,7 +7,7 @@ class PrescriptionFill(val id: UUID,
                        val lotNumber: UInt,
                        val expiryDate: LocalDate
     ){
-    val status: PrescriptionFillStatus = PrescriptionFillStatus.PREPARED
+    var status: PrescriptionFillStatus = PrescriptionFillStatus.PREPARED
     var clinicalCheck: String? = null
     var pickUpSummary: String? = null
     var preparationAgentID: UUID? = null

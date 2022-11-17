@@ -8,6 +8,7 @@ interface AgentFacade {
     fun addAgent(agentInfo: AgentDto) : UUID
     fun getAgent(agentID: UUID) : User?
     fun updateAgentCredentials(agentID: UUID, email: String, password: String)
-    fun updateAgent(agentID: UUID, agentInfo: AgentDto)
-    fun unregisterAgent(agentID: UUID)
+    fun updateAgent(agentID: UUID, agentInfo: AgentDto): Boolean
+    fun isPharmacist(agentID: UUID): Boolean
+    fun unregisterAgent(agentID: UUID): Boolean
 }

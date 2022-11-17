@@ -17,6 +17,6 @@ class Prescription(val id: UUID,
                    val drugName: String? = null,
                    val drugStrengthMgPerMl: Float? = 0f
                    ){
-    val fills: MutableList<Prescription> = ArrayList()
+    val fills: MutableList<PrescriptionFill> = ArrayList()
     lateinit var patient : Patient
 }

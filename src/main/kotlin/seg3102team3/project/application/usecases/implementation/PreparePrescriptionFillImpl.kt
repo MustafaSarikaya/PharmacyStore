@@ -32,10 +32,10 @@ class PreparePrescriptionFillImpl(
         return result
     }
 
-    override fun fetchPrescriptionDocs(prescriptionFillID: UUID): ByteArray? {
+    override fun fetchPrescriptionDocs(prescriptionFillID: UUID): MutableList<ByteArray>? {
         var din: UInt? = patientFacade.fetchPrescriptionFillDIN(prescriptionFillID);
         if(din == null) return null
-        var documents: Array<ByteArray> = drugFacade.fetchDrugDocuments(din)
+        var documents: MutableList<ByteArray>? = drugFacade.fetchDrugDocuments(din)
         return documents;
     }
 }

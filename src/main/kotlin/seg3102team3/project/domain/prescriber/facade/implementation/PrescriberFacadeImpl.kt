@@ -7,25 +7,22 @@ import seg3102team3.project.domain.prescriber.services.PrescriberRegistryAdaptor
 class PrescriberFacadeImpl(val prescriberRepository: PrescriberRegistryAdaptor) : PrescriberFacade {
 
     override fun identifyPrescriberByName(name: String): String? {
-        return if (prescriberRepository.getPrescriberByName(name) != null) name else null
+        return prescriberRepository.getPrescriberByName(name)?.id
     }
 
     override fun identifyPrescriberByEmail(email: String): String? {
-        return if (prescriberRepository.getPrescriberByEmail(email) != null) email else null
+        return prescriberRepository.getPrescriberByEmail(email)?.id
     }
 
     override fun identifyPrescriberByLicenseNumber(licenseNum: String): String? {
-        return if (prescriberRepository.getPrescriberByLicenseNumber(licenseNum) != null) licenseNum
-        else null
+        return prescriberRepository.getPrescriberByLicenseNumber(licenseNum)?.id
     }
 
     /**
-     * Returns the email associated with the prescriber with the given ID.
-     *
-     * Assumes that the id is valid
+     * Returns the contact info associated with the prescriber with the given ID.
      */
-    override fun fetchPrescriberEmail(id: String): String {
-        val p = prescriberRepository.getPrescriberByID(id)!!
-        return p.emailAddress
+    override fun fetchContactInfo(id: String): String? {
+        val info = prescriberRepository.getPrescriberByLicenseNumber(id)?.compileContactInfo();
+        return info
     }
 }

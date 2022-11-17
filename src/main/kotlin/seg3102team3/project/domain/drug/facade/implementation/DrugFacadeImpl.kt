@@ -22,10 +22,16 @@ class DrugFacadeImpl(val drugDB: DrugProductDatabaseAdaptor) : DrugFacade {
     /**
      * Returns the monograph of the drug with the given DIN.
      *
-     * Assumes that the DIN is valid
      */
-    override fun fetchDrugDocuments(din: String): ByteArray {
-        val d = drugDB.getDrugByDIN(din.toUInt())!!
-        return d.monographPDF
+    override fun fetchDrugDocuments(din: UInt): MutableList<ByteArray>? {
+        val drug = drugDB.getDrugByDIN(din)
+        if(drug == null) return null
+
+        val res: MutableList<ByteArray> = ArrayList()
+        res.add(drug.monographPDF)
+
+        for(pdf in drug.counsellingDocsPDF) res.add(pdf)
+        for(pdf in drug.pastReports) res.add(pdf)
+        return res
     }
 }

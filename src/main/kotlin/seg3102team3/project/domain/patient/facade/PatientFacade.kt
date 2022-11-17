@@ -7,16 +7,15 @@ import seg3102team3.project.domain.patient.entities.Patient
 import java.util.UUID
 
 interface PatientFacade {
-    fun addPatient(patientInfo: PatientDto)
-    fun addPrescription(patientId: String, prescriptionInfo: PrescriptionDto)
-    fun addPrescriptionFill(prescriptionFillInfo: PrescriptionFillDto, agentID: UUID)
-    fun updatePatient(patientID: String, patientInfo: PatientDto)
-    fun identifyPatientByName(name: String): Patient?
-    fun identifyPatientByEmail(email: String): Patient?
-    fun identifyPatientByPHIN(phin: String): Patient?
+    fun addPatient(newPatientInfo: PatientDto): String
+    fun addPrescription(prescriptionInfo: PrescriptionDto): UUID?
+    fun addPrescriptionFill(prescriptionFillInfo: PrescriptionFillDto, agentID: UUID): UUID?
+    fun updatePatient(patientID: String, patientInfo: PatientDto): Boolean
+    fun identifyPatientByName(name: String): String?
+    fun identifyPatientByEmail(email: String): String?
+    fun identifyPatientByPHIN(phin: String): String?
     fun fetchPrescriptionFillDIN(prescriptionFillID: UUID): UInt?
-    fun pickUpPrescriptionFill(prescriptionFillID: UUID, agentID: UUID, pickUpSummary: String)
+    fun pickUpPrescriptionFill(prescriptionFillID: UUID, agentID: UUID, pickUpSummary: String): Boolean
     fun verifyPatientIdentifier(someIdentifier: String):Patient?
-    fun verifyPrescriptionFill(prescriptionFillID: UUID, pharmacistID: UUID, clinicalCheck: String)
-    fun cancelPrescriptionFill(prescriptionFillID: UUID, pharmacistID: UUID, clinicalCheck: String)
+    fun verifyPrescriptionFill(prescriptionFillID: UUID, pharmacistID: UUID, clinicalCheck: String, verification: Boolean): Boolean
 }

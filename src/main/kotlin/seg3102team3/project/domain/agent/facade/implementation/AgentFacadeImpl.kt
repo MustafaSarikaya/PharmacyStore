@@ -5,6 +5,7 @@ import seg3102team3.project.domain.agent.repositories.UserRepository
 import seg3102team3.project.domain.agent.factories.UserFactory
 import seg3102team3.project.application.services.DomainEventEmitter
 import seg3102team3.project.domain.agent.entities.User
+import seg3102team3.project.domain.agent.entities.UserRole
 import seg3102team3.project.domain.agent.events.NewAgentAdded
 import seg3102team3.project.domain.agent.events.AgentUpdated
 import seg3102team3.project.domain.agent.events.AgentRemoved
@@ -29,16 +30,24 @@ class AgentFacadeImpl (
         return agent
     }
 
-    override fun updateAgent(agentID: UUID, agentInfo: AgentDto) {
+    override fun updateAgent(agentID: UUID, agentInfo: AgentDto) : Boolean {
         val agent = userRepository.find(agentID)
-        if (agent != null) {
-            val tempAgent = userFactory.createAgent(agentInfo)
-            agent.name = tempAgent.name
-            agent.userName = tempAgent.userName
-            agent.language = tempAgent.language
-            agent.role = tempAgent.role
-            eventEmitter.emit(AgentUpdated(UUID.randomUUID(), Date(), agent.id))
-        }
+        if(agent == null) return false
+
+        val tempAgent = userFactory.createAgent(agentInfo)
+        agent.name = tempAgent.name
+        agent.userName = tempAgent.userName
+        agent.language = tempAgent.language
+        agent.role = tempAgent.role
+        eventEmitter.emit(AgentUpdated(UUID.randomUUID(), Date(), agent.id))
+        return true
+    }
+
+    override fun isPharmacist(agentID: UUID): Boolean {
+        val agent = userRepository.find(agentID)
+        if(agent == null) return false
+
+        return agent.role == UserRole.PHARMACIST
     }
 
     override fun updateAgentCredentials(agentID: UUID, email: String, password: String) {
@@ -50,11 +59,12 @@ class AgentFacadeImpl (
         }
     }
 
-    override fun unregisterAgent(agentID: UUID) {
+    override fun unregisterAgent(agentID: UUID): Boolean {
         val agent = userRepository.find(agentID)
-        if (agent != null) {
-            agent.deactivate()
-            eventEmitter.emit(AgentRemoved(UUID.randomUUID(), Date(), agent.id))
-        }
+        if(agent == null) return false
+
+        agent.deactivate()
+        eventEmitter.emit(AgentRemoved(UUID.randomUUID(), Date(), agent.id))
+        return true
     }
 }

@@ -33,11 +33,11 @@ class CreatePrescriptionImpl(
         if(din != null) return din
         din = drugFacade.identifyDrugByATC(identifier)
         if(din != null) return din
-        return drugFacade.identifyDrugByDIN(identifier)
+        return drugFacade.identifyDrugByDIN(identifier.toUInt())
     }
 
     override fun createPrescription(prescriptionInfo: PrescriptionDto): UUID? {
-        var uuid: UUID? = patientFacade.createPrescription(prescriptionInfo)
+        var uuid: UUID? = patientFacade.addPrescription(prescriptionInfo)
         return uuid
     }
 }
