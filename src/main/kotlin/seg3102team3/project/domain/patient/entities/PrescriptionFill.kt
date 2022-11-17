@@ -4,10 +4,14 @@ import java.time.LocalDate
 import java.util.UUID
 
 class PrescriptionFill(val id: UUID,
-                       val prescriptionID: UUID,
                        val lotNumber: UInt,
-                       val expiryDate: LocalDate,
-                       var status: PrescriptionFillStatus,
-                       var pickUpSummary: String?,
-                       var clinicalCheck: String?
-    )
+                       val expiryDate: LocalDate
+    ){
+    val status: PrescriptionFillStatus = PrescriptionFillStatus.PREPARED
+    var clinicalCheck: String? = null
+    var pickUpSummary: String? = null
+    var preparationAgentID: UUID? = null
+    var checkPharmacistID: UUID? = null
+    var retrievalPharmacistID: UUID? = null
+    lateinit var prescription: Prescription
+}

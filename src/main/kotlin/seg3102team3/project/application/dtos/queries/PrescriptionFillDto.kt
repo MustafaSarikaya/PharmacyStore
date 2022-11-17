@@ -5,5 +5,5 @@ import java.util.UUID
 
 data class PrescriptionFillDto (
     val prescriptionID: UUID,
-    val lotNumber: Int,
+    val lotNumber: UInt,
     val expiryDate: LocalDate)

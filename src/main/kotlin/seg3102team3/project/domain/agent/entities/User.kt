@@ -10,13 +10,14 @@ class User(
         var userName: String,
         var email: String,
         var password: String,
-        var name: Name
+        var name: Name,
+        var language: LanguagePreference,
+        var gender: Gender,
+        var role: UserRole
 ) {
     var activated: Boolean = true
     var passwordTemporary: Boolean = true
-    var language: LanguagePreference? = null
-    var role: UserRole? = null
-    var gender: Gender? = null
+
 
     fun update(agent: User) {
         this.userName = agent.userName

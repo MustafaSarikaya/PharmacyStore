@@ -4,6 +4,7 @@ class Drug(
         val id: UInt,
         var name: String,
         var tradeName: String,
+        var ATC: String,
         var formula: String,
         var strengthMgPerMl: Float,
         var monographPDF: ByteArray,
