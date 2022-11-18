@@ -19,6 +19,7 @@ import seg3102team3.project.contracts.testStubs.repositories.PatientRepositorySt
 import seg3102team3.project.contracts.testStubs.repositories.UserRepositoryStub
 import seg3102team3.project.contracts.testStubs.services.DrugProductDatabaseAdaptorStub
 import seg3102team3.project.contracts.testStubs.services.EventEmitterStub
+import seg3102team3.project.contracts.testStubs.services.HashServiceImpl
 import seg3102team3.project.contracts.testStubs.services.PrescriberRegistryAdaptorStub
 import seg3102team3.project.domain.agent.entities.User
 import seg3102team3.project.domain.agent.entities.UserRole
@@ -41,11 +42,12 @@ class StepsDefinition: En {
     private var prescriberRegistryAdaptor = PrescriberRegistryAdaptorStub()
     private var drugDatabaseAdaptor = DrugProductDatabaseAdaptorStub()
     private var eventEmitter = EventEmitterStub()
+    private var hashService = HashServiceImpl()
 
     private var patientFactory = PatientFactoryStub()
     private var prescriptionFactory = PrescriptionFactoryStub()
     private var prescriptionFillFactory = PrescriptionFillFactoryStub()
-    private var userFactory = UserFactoryStub()
+    private var userFactory = UserFactoryStub(hashService)
 
     private var patientInfo: PatientDto? = null
     private var prescriptionInfo: PrescriptionDto? = null
@@ -412,7 +414,7 @@ class StepsDefinition: En {
             val newUser: User = userRepository.find(newUserID!!)!!
             Assertions.assertThat(newUser.username).isEqualTo(agentInfo!!.username)
             Assertions.assertThat(newUser.email).isEqualTo(agentInfo!!.username)
-            Assertions.assertThat(newUser.password).isEqualTo(agentInfo!!.password)
+            Assertions.assertThat(newUser.password).isEqualTo(hashService.md5(agentInfo!!.password))
             Assertions.assertThat(newUser.name).isEqualTo(Name(
                 agentInfo!!.fullName.substring(0, agentInfo!!.fullName.indexOf(' ')),
                 agentInfo!!.fullName.substring(agentInfo!!.fullName.indexOf(' ')+1, agentInfo!!.fullName.lastIndexOf(' ')),
@@ -427,7 +429,7 @@ class StepsDefinition: En {
             val updatedUser: User = userRepository.find(userID!!)!!
             Assertions.assertThat(updatedUser.username).isEqualTo(agentInfo!!.username)
             Assertions.assertThat(updatedUser.email).isEqualTo(agentInfo!!.username)
-            Assertions.assertThat(updatedUser.password).isEqualTo(agentInfo!!.password)
+            Assertions.assertThat(updatedUser.password).isEqualTo(hashService.md5(agentInfo!!.password))
             Assertions.assertThat(updatedUser.name).isEqualTo(Name(
                 agentInfo!!.fullName.substring(0, agentInfo!!.fullName.indexOf(' ')),
                 agentInfo!!.fullName.substring(agentInfo!!.fullName.indexOf(' ')+1, agentInfo!!.fullName.lastIndexOf(' ')),
@@ -445,7 +447,7 @@ class StepsDefinition: En {
             val updatedUser: User = userRepository.find(userID!!)!!
             Assertions.assertThat(updatedUser.username).isEqualTo(agentInfo!!.username)
             Assertions.assertThat(updatedUser.email).isEqualTo(agentInfo!!.username)
-            Assertions.assertThat(updatedUser.password).isEqualTo(agentInfo!!.password)
+            Assertions.assertThat(updatedUser.password).isEqualTo(hashService.md5(agentInfo!!.password))
             Assertions.assertThat(updatedUser.name).isEqualTo(Name(
                 agentInfo!!.fullName.substring(0, agentInfo!!.fullName.indexOf(' ')),
                 agentInfo!!.fullName.substring(agentInfo!!.fullName.indexOf(' ')+1, agentInfo!!.fullName.lastIndexOf(' ')),
@@ -486,6 +488,9 @@ class StepsDefinition: En {
         }
         Then("the System returns null - expected prescriber") {
             Assertions.assertThat(verifiedPrescriberID).isNull()
+        }
+        Then("the System returns null - expected UUID") {
+            Assertions.assertThat(newPrescriptionFillID).isNull()
         }
         Then("the Prescription Fill's status is set to verified") {
             Assertions.assertThat(patientRepository.findByPrescriptionFillID(prescriptionFillID!!)!!.getPrescriptionFill(prescriptionFillID!!)!!.status
@@ -589,11 +594,12 @@ class StepsDefinition: En {
             prescriberRegistryAdaptor = PrescriberRegistryAdaptorStub()
             drugDatabaseAdaptor = DrugProductDatabaseAdaptorStub()
             eventEmitter = EventEmitterStub()
+            hashService = HashServiceImpl()
 
             patientFactory = PatientFactoryStub()
             prescriptionFactory = PrescriptionFactoryStub()
             prescriptionFillFactory = PrescriptionFillFactoryStub()
-            userFactory = UserFactoryStub()
+            userFactory = UserFactoryStub(hashService)
 
             patientInfo = null
             prescriptionInfo = null
@@ -621,10 +627,6 @@ class StepsDefinition: En {
             verifiedPrescriberID = null
 
             initialUserRole = null
-        }
-
-        Then("the System returns null - expected UUID") {
-            TODO("Not yet implemented")
         }
     }
 }
