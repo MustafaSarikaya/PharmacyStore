@@ -561,7 +561,44 @@ class StepsDefinition: En {
         }
 
         After { _: Scenario ->
+            patientRepository = PatientRepositoryStub()
+            userRepository = UserRepositoryStub()
 
+            prescriberRegistryAdaptor = PrescriberRegistryAdaptorStub()
+            drugDatabaseAdaptor = DrugProductDatabaseAdaptorStub()
+            eventEmitter = EventEmitterStub()
+
+            patientFactory = PatientFactoryStub()
+            prescriptionFactory = PrescriptionFactoryStub()
+            prescriptionFillFactory = PrescriptionFillFactoryStub()
+            userFactory = UserFactoryStub()
+
+            patientInfo = null
+            prescriptionInfo = null
+            prescriptionFillInfo = null
+            agentInfo = null
+
+            patientID = null
+            prescriberID = null
+            prescriptionFillID = null
+            userID = null
+            identifier = null
+            verification = null
+            pickUpSummary = null
+            clinicalCheck = null
+
+            newPatientID = null
+            newUserID = null
+            newPrescriptionID = null
+            newPrescriptionFillID = null
+            success = null
+            fetchedContactInfo = null
+            fetchedPrescriptionDocs = null
+            verifiedDrugID = null
+            verifiedPatientID = null
+            verifiedPrescriberID = null
+
+            initialUserRole = null
         }
     }
 }
