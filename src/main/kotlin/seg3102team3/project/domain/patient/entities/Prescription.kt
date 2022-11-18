@@ -12,7 +12,7 @@ class Prescription(val id: UUID,
                    val frequencyInstruction: String,
                    val notes: String? = null,
                    val refillable: RefillableStatus,
-                   val refillCount: UShort? = 0u,
+                   var refillCount: UShort? = 0u,
                    val adminMethod: AdministrationMethod,
                    val drugName: String? = null,
                    val drugStrengthMgPerMl: Float? = 0f

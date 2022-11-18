@@ -120,6 +120,28 @@ class StepsDefinition: En {
             Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)).isNotNull
             Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)).isNotNull //redundant check
         }
+        Given("the prescription fill info's prescription is non-refillable") {
+            Assertions.assertThat(prescriptionFillInfo).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!.refillable == RefillableStatus.NON_REFILLABLE).isTrue
+        }
+        Given("the prescription fill info's prescription is not non-refillable") {
+            Assertions.assertThat(prescriptionFillInfo).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!.refillable == RefillableStatus.NON_REFILLABLE).isFalse
+        }
+        Given("the prescription fill info's prescription's refill count is above 0") {
+            Assertions.assertThat(prescriptionFillInfo).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!.refillCount).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!.refillCount!! > 0u).isTrue
+        }
+        Given("the prescription fill info's prescription's refill count is under 1") {
+            Assertions.assertThat(prescriptionFillInfo).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!.refillCount).isNotNull
+            Assertions.assertThat(patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!.refillCount!! < 0u).isTrue
+        }
         Given("the agent info's language preference matches to a Language value"){
             Assertions.assertThat(agentInfo).isNotNull
             Assertions.assertThat(enumValues<LanguagePreference>().any { it.name == agentInfo!!.languagePref.uppercase() }).isTrue
@@ -440,7 +462,7 @@ class StepsDefinition: En {
             Assertions.assertThat(verifiedDrugID).isNotNull
             Assertions.assertThat(verifiedDrugID!!).isEqualTo(identifier!!.toUInt())
         }
-        Then("the System returns null - drug") {
+        Then("the System returns null - expected drug") {
             Assertions.assertThat(verifiedDrugID).isNull()
         }
         Then("the System returns the ID of the Patient") {
@@ -451,7 +473,7 @@ class StepsDefinition: En {
             Assertions.assertThat(verifiedPatientID).isNotNull
             Assertions.assertThat(verifiedPatientID!!).isEqualTo(identifier!!)
         }
-        Then("the System returns null - patient") {
+        Then("the System returns null - expected patient") {
             Assertions.assertThat(verifiedPatientID).isNull()
         }
         Then("the System returns the ID of the known Prescriber") {
@@ -462,7 +484,7 @@ class StepsDefinition: En {
             Assertions.assertThat(verifiedPrescriberID).isNotNull
             Assertions.assertThat(verifiedPrescriberID!!).isEqualTo(identifier!!)
         }
-        Then("the System returns null - prescriber") {
+        Then("the System returns null - expected prescriber") {
             Assertions.assertThat(verifiedPrescriberID).isNull()
         }
         Then("the Prescription Fill's status is set to verified") {
@@ -599,6 +621,10 @@ class StepsDefinition: En {
             verifiedPrescriberID = null
 
             initialUserRole = null
+        }
+
+        Then("the System returns null - expected UUID") {
+            TODO("Not yet implemented")
         }
     }
 }

@@ -17,4 +17,4 @@ Feature: Verifying a Patient Identifier
   Scenario: Given identifier does not match an existing Patient's name, email or PHIN
     Given the given identifier does not match an existing Patient's name, email or PHIN
     When application command verifyPatientInfo is invoked
-    Then the System returns null - patient
+    Then the System returns null - expected patient

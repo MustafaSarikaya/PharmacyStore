@@ -6,6 +6,7 @@ import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
 import seg3102team3.project.application.services.DomainEventEmitter
 import seg3102team3.project.domain.patient.entities.PrescriptionFillStatus
 import seg3102team3.project.domain.patient.entities.Patient
+import seg3102team3.project.domain.patient.entities.RefillableStatus
 import seg3102team3.project.domain.patient.events.*
 import seg3102team3.project.domain.patient.facade.PatientFacade
 import seg3102team3.project.domain.patient.factory.PatientFactory
@@ -47,12 +48,15 @@ class PatientFacadeImpl (
         if(patient == null) return null
 
         val prescription = patient.getPrescription(prescriptionFillInfo.prescriptionID)
-        if(prescription == null) return null
+        if(prescription == null
+            || prescription.refillable == RefillableStatus.NON_REFILLABLE
+            || prescription.refillCount!! <= 0u) return null
 
         val prescriptionFill = prescriptionFillFactory.createPrescriptionFill(prescriptionFillInfo)
         prescriptionFill.prescription = prescription
         prescriptionFill.preparationAgentID = agentID
         prescription.fills.add(prescriptionFill)
+        prescription.refillCount = (prescription.refillCount!! - 1u).toUShort()
 
         patientRepository.save(patient)
         eventEmitter.emit(NewPrescriptionFillAdded(prescriptionFill.id, Date()))

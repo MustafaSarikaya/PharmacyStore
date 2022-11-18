@@ -17,4 +17,4 @@ Feature: Verifying a Drug Identifier
   Scenario: Given identifier does not match a known Drug's name, ATC or DIN
     Given the given identifier does not match a known Drug's name, ATC or DIN
     When application command verifyDrugInfo is invoked
-    Then the System returns null - drug
+    Then the System returns null - expected drug

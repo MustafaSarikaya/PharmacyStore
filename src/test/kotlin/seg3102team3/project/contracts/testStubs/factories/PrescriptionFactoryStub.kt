@@ -29,7 +29,7 @@ class PrescriptionFactoryStub: PrescriptionFactory {
             prescriptionInfo.frequencyInstruction,
             prescriptionInfo.notes,
             rs,
-            prescriptionInfo.refillCount,
+            if(rs != RefillableStatus.NON_REFILLABLE) prescriptionInfo.refillCount else 0u,
             AdministrationMethod.valueOf(prescriptionInfo.adminMethod.uppercase().replace(' ', '_')),
             drug?.name,
             drug?.strengthMgPerMl)
