@@ -36,7 +36,7 @@ class AgentFacadeImpl (
 
         val tempAgent = userFactory.createAgent(agentInfo)
         agent.name = tempAgent.name
-        agent.userName = tempAgent.userName
+        agent.username = tempAgent.username
         agent.language = tempAgent.language
         agent.role = tempAgent.role
         eventEmitter.emit(AgentUpdated(UUID.randomUUID(), Date(), agent.id))

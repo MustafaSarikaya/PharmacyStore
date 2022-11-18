@@ -17,4 +17,4 @@ Feature: Verifying a Prescriber Identifier
   Scenario: Given identifier does not match a known Prescriber's name, email or license number
     Given the given identifier does not match a known Prescriber's name, email or license number
     When application command verifyPrescriberInfo is invoked
-    Then the System returns null
+    Then the System returns null - prescriber

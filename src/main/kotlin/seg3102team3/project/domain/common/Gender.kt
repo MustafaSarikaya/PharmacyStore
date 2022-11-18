@@ -4,5 +4,5 @@ enum class Gender {
     MALE,
     FEMALE,
     OTHER,
-    UNSPECIFIED
+    RATHER_NOT_SAY
 }

@@ -21,8 +21,8 @@ class UserFactoryStub: UserFactory {
                 agentInfo.fullName.substring(agentInfo.fullName.indexOf(' ')+1, agentInfo.fullName.lastIndexOf(' ')),
                 agentInfo.fullName.substring(agentInfo.fullName.lastIndexOf(' ')+1),
             ),
-            LanguagePreference.valueOf(agentInfo.languagePref),
-            Gender.valueOf(agentInfo.gender),
+            LanguagePreference.valueOf(agentInfo.languagePref.uppercase()),
+            Gender.valueOf(agentInfo.gender.uppercase().replace(' ', '_')),
             if(agentInfo.pharmacist) UserRole.PHARMACIST else UserRole.ASSISTANT
         )
     }

@@ -19,7 +19,6 @@ class Prescriber(
         var gender: Gender,
         var languagePref: LanguagePreference
 ) {
-
         fun compileContactInfo(): String {
                 val sb = StringBuilder()
                 sb.append("Phone Number: ").append(phoneNumber).append("\n")

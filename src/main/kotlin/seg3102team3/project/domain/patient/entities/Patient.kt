@@ -18,7 +18,7 @@ class Patient(
     var insuranceNumber: String? = null,
     var fullName: Name,
     var languagePref: LanguagePreference,
-    var genderType: Gender,
+    var gender: Gender,
     var address: Address
 ){
     val prescriptions: MutableList<Prescription> = ArrayList()
@@ -36,7 +36,7 @@ class Patient(
         address = Address(addressComponents[0].toUInt(), addressComponents[1], addressComponents[2], addressComponents[3], addressComponents[4])
         email = patientInfo.email
         phoneNumber = patientInfo.phoneNumber
-        genderType = Gender.valueOf(patientInfo.gender)
+        gender = Gender.valueOf(patientInfo.gender)
         dateOfBirth = patientInfo.dateOfBirth
         languagePref = LanguagePreference.valueOf(patientInfo.languagePref)
         healthHistoryNote = patientInfo.healthHistoryNote

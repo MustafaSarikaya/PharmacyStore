@@ -30,7 +30,7 @@ class PrescriptionFactoryStub: PrescriptionFactory {
             prescriptionInfo.notes,
             rs,
             prescriptionInfo.refillCount,
-            AdministrationMethod.valueOf(prescriptionInfo.adminMethod),
+            AdministrationMethod.valueOf(prescriptionInfo.adminMethod.uppercase().replace(' ', '_')),
             drug?.name,
             drug?.strengthMgPerMl)
     }

@@ -1,7 +1,9 @@
 Feature: Updating an Agent as an Administrator
     Scenario: Admin updates a registered Agent
-        Given an agent exists with the given ID
+        Given the user account specified by the given ID is registered
+        And the user account specified by the given ID is an Agent
         And the agent info's language preference matches to a Language value
         And the agent info's gender matches to a Gender value
         When the application command privilegedUpdateAgent is invoked
-        Then the agent is updated from the agent information
+        Then the operation is carried out successfully
+        And the user account is updated from the agent information

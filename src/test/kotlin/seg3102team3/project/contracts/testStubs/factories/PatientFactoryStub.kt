@@ -25,8 +25,8 @@ class PatientFactoryStub: PatientFactory {
                 newPatientInfo.fullName.substring(newPatientInfo.fullName.indexOf(' ')+1, newPatientInfo.fullName.lastIndexOf(' ')),
                 newPatientInfo.fullName.substring(newPatientInfo.fullName.lastIndexOf(' ')+1),
             ),
-            LanguagePreference.valueOf(newPatientInfo.languagePref),
-            Gender.valueOf(newPatientInfo.gender),
+            LanguagePreference.valueOf(newPatientInfo.languagePref.uppercase()),
+            Gender.valueOf(newPatientInfo.gender.uppercase().replace(' ', '_')),
             Address(addressComponents[0].toUInt(), addressComponents[1], addressComponents[2], addressComponents[3], addressComponents[4]),
         )
     }
