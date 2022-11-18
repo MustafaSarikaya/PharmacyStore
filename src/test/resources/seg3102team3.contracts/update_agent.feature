@@ -1,6 +1,6 @@
 Feature: Updating One's Own Information as an Agent.
     Scenario: Agent is registered
-        Given the Agent specified by the given ID is registered
+        Given an agent exists with the given ID
         And the agent info's language preference matches to a Language value
         And the agent info's gender matches to a Gender value
         When the application command updateAgent is invoked
