@@ -524,7 +524,7 @@ class StepsDefinition: En {
         }
         Then("the new prescription fill's prescription's refill count was decremented") {
             val newPrescriptionFill: PrescriptionFill = patientRepository.findByPrescriptionFillID(newPrescriptionFillID!!)!!.getPrescriptionFill(newPrescriptionFillID!!)!!
-            Assertions.assertThat(newPrescriptionFill.prescription.refillCount).isEqualTo(initialRefillCount!! - 1u)
+            Assertions.assertThat(newPrescriptionFill.prescription.refillCount!!).isEqualTo((initialRefillCount!! - 1u).toUShort())
         }
         Then("the new prescription fill is added to the prescription's fills") {
             val prescription: Prescription = patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!
