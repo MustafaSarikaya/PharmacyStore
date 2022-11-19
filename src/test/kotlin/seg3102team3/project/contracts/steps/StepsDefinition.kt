@@ -75,6 +75,7 @@ class StepsDefinition: En {
     private var verifiedPrescriberID: String? = null
 
     private var initialUserRole: UserRole? = null
+    private var initialRefillCount: UShort? = null
 
     init {
         Before { _: Scenario ->
@@ -296,6 +297,7 @@ class StepsDefinition: En {
             success = uc.pickUpMedicine(prescriptionFillID!!, userID!!, pickUpSummary!!)
         }
         When("application command preparePrescriptionFill is invoked") {
+            initialRefillCount = patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!.refillCount
             val patientFacade = PatientFacadeImpl(patientRepository, patientFactory, prescriptionFactory, prescriptionFillFactory, eventEmitter)
             val prescriberFacade = PrescriberFacadeImpl(prescriberRegistryAdaptor)
             val drugFacade = DrugFacadeImpl(drugDatabaseAdaptor)
@@ -520,6 +522,10 @@ class StepsDefinition: En {
             val newPrescriptionFill: PrescriptionFill = patientRepository.findByPrescriptionFillID(newPrescriptionFillID!!)!!.getPrescriptionFill(newPrescriptionFillID!!)!!
             Assertions.assertThat(newPrescriptionFill.prescription).isEqualTo(prescription)
         }
+        Then("the new prescription fill's prescription's refill count was decremented") {
+            val newPrescriptionFill: PrescriptionFill = patientRepository.findByPrescriptionFillID(newPrescriptionFillID!!)!!.getPrescriptionFill(newPrescriptionFillID!!)!!
+            Assertions.assertThat(newPrescriptionFill.prescription.refillCount).isEqualTo(initialRefillCount!! - 1u)
+        }
         Then("the new prescription fill is added to the prescription's fills") {
             val prescription: Prescription = patientRepository.findByPrescriptionID(prescriptionFillInfo!!.prescriptionID)!!.getPrescription(prescriptionFillInfo!!.prescriptionID)!!
             val newPrescriptionFill: PrescriptionFill = patientRepository.findByPrescriptionFillID(newPrescriptionFillID!!)!!.getPrescriptionFill(newPrescriptionFillID!!)!!
@@ -627,6 +633,8 @@ class StepsDefinition: En {
             verifiedPrescriberID = null
 
             initialUserRole = null
+            initialRefillCount = null
         }
+
     }
 }

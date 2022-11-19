@@ -9,6 +9,7 @@ Feature: Prepare Prescription Fill.
         Then a new prescription fill is created
         And the new prescription fill is initialized from the prescription fill information
         And the new prescription fill's prescription is set to the provided prescription
+        And the new prescription fill's prescription's refill count was decremented
         And the new prescription fill is added to the prescription's fills
         And the new prescription fill's status is set to prepared
         And the new prescription fill's preparation agent ID is set to the given ID
