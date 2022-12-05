@@ -27,6 +27,9 @@ dependencies {
 	testImplementation("io.cucumber:cucumber-java8:7.3.3")
 	testImplementation("io.cucumber:cucumber-spring:7.3.3")
 	testImplementation("io.cucumber:cucumber-junit-platform-engine:7.3.3")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+	implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:14.0.0")
+	testImplementation("com.graphql-java-kickstart:graphql-spring-boot-starter-test:14.0.0")
 }
 
 tasks.withType<KotlinCompile> {
