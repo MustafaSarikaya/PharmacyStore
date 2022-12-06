@@ -4,39 +4,39 @@ import seg3102team3.project.application.usecases.GenerateDrugReport
 import seg3102team3.project.domain.agent.facade.AgentFacade
 import seg3102team3.project.domain.drug.facade.DrugFacade
 import java.util.*
-import java.io.FileWriter;
-import java.io.File
-import java.io.FileInputStream
-import java.io.BufferedWriter;
-import java.nio.file.Files;
-import org.springframework.http.HttpHeaders
-import org.springframework.http.ResponseEntity
-import org.springframework.http.MediaType
-import org.springframework.core.io.InputStreamResource
+import java.util.ArrayList
+import java.util.List
+import java.util.stream.Collectors
+import java.io.FileOutputStream
+import com.itextpdf.text.Document
+import com.itextpdf.text.Font
+import com.itextpdf.text.FontFactory
+import com.itextpdf.text.BaseColor
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.pdf.PdfWriter;
+
 
 
 class GenerateDrugReportImpl(
     private var agentFacade: AgentFacade, private var drugFacade: DrugFacade): GenerateDrugReport {
         
-        override fun generateDrugReport(agentID: UUID, drugDIN: UInt, startDate: String, endDate: String, description: String): ByteArray? {
-            var filePath: String = "C:\\"
-            var fileName: String = "PDF.pdf"
-            var output: String
-            var bytes: ByteArray
-            var headers: HttpHeaders = HttpHeaders()
-            var writer: BufferedWriter = BufferedWriter(FileWriter(filePath + fileName))
-            var file: File = File(filePath+fileName)
-            var resource: InputStreamResource = InputStreamResource(FileInputStream(file))
+        override fun generateDrugReport(agentID: UUID, drugDIN: UInt, startDate: String, endDate: String, description: String): String? {
+            var output: String = ""
+            var document: Document = Document()
+            var font: Font = FontFactory.getFont("Courier")
+            var start: String = startDate.replace('/', '-')
+            var end: String = endDate.replace('/', '-')
+            var fileName: String = start + end + ".pdf"
             if (!agentFacade.isPharmacist(agentID)) {
                 output = "Drug DIN: " + drugDIN.toString() + "\n" + 
                     startDate + " - " + endDate + "\n" + 
                     "Prescriber ID: " + agentID.toString() + "\n" + description
             } else {return null}
-            writer.write(output)
-            writer.close()
-            bytes = Files.readAllBytes(file.toPath());
-            headers.add("Content-Disposition", "inline;filename=PDF.pdf");
-            ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("application/pdf")).body(resource)
-            return bytes;
+            var chunk: Chunk = Chunk(output, font)
+            PdfWriter.getInstance(document, FileOutputStream(fileName))
+            document.open()
+            document.add(chunk)
+            document.close()
+            return fileName
         }
 }

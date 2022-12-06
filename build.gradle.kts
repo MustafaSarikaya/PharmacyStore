@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+	implementation("com.itextpdf:itextpdf:5.0.6")
+	implementation("org.apache.pdfbox:pdfbox:2.0.1")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
