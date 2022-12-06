@@ -2,8 +2,6 @@
 
 **Branch deliverable**: Deliverable 2 *(Domain)*
 
-**Note**:  While we have done everything we could to ensure our design stays consistent, there may still be some consistency issues in some realization diagrams and in the code; both are due to the time constraint. For the same reason, even though testStubs code was fully implemented, we could not fully finish implementing BDD testing. 
-
 Project JDK: 19 (19.0.1; vendor: Oracle OpenJDK)<br>
 Language Level: 17<br>
 Gradle JVM: 17 (17.0.5; vendor: corretto)<br>
