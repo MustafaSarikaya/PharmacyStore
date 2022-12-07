@@ -1,5 +1,6 @@
 package seg3102team3.project.application.dtos.queries.converters
 
+import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
 import seg3102team3.project.domain.patient.entities.PrescriptionFill

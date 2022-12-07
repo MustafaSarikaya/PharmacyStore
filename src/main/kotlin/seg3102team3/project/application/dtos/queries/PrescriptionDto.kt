@@ -10,5 +10,5 @@ data class PrescriptionDto(val patientID: String,
                            val adminMethod: String, //this matches to an AdministrationMethod enum
                            val frequencyInstruction: String,
                            val notes: String?,
-                           val refillable: String, //0, 1 or 2 this matches to a RefillableStatus enum
+                           val refillable: UByte, //0, 1 or 2 this matches to a RefillableStatus enum
                            val refillCount: UShort?) //if refillable

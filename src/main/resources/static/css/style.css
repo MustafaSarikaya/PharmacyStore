@@ -10,7 +10,7 @@ body {
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
     border-radius: 15px;
     padding: 15px;
-    margin: 3.5em 15px 15px 15em;
+    margin: 3.5em 15px 15px 17em;
     background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .menu {
-    width: 15em;
+    width: 17em;
     height: 100%;
     position: fixed;
     top: 0;

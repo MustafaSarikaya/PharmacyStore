@@ -1,14 +1,13 @@
 package seg3102team3.project.infrastructure.web.forms.converters
 
+import org.springframework.stereotype.Component
 import seg3102team3.project.application.dtos.queries.PatientDto
 import seg3102team3.project.infrastructure.web.forms.PatientForm
 import java.time.LocalDate
 
-abstract class PatientFormDtoConverter {
-
-    abstract fun convertPatient(formData: PatientForm): PatientDto
-
-    fun mapDateOfBirth(dateOfBirth: String): LocalDate {
-        return LocalDate.parse(dateOfBirth)
+@Component
+class PatientFormDtoConverter{
+    fun convertFormPatient(formData: PatientForm): PatientDto {
+        return PatientDto("","","","","","", LocalDate.EPOCH,"","",emptyArray(),emptyArray(),"")
     }
 }

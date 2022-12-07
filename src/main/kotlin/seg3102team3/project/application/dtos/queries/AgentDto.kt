@@ -7,4 +7,4 @@ data class AgentDto (
     val languagePref: String, //this matches to a Language enum
     val email: String,
     val password: String, //business logic will hash the password before storing in User entity
-    var pharmacist: Boolean) //if true, resulting User entity is Pharmacist, else Assistant
+    var role: String) //this matches to a Role enum

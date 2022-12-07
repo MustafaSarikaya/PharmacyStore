@@ -1,5 +1,7 @@
 package seg3102team3.project.infrastructure.web.forms
 
+import javax.validation.constraints.Email
+
 class PatientForm {
     var firstname: String? = null
     var middlenames: String? = null

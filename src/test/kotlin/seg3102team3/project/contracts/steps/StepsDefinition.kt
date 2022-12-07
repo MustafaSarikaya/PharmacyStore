@@ -351,7 +351,7 @@ class StepsDefinition: En {
             val prescriberFacade = PrescriberFacadeImpl(prescriberRegistryAdaptor)
             val drugFacade = DrugFacadeImpl(drugDatabaseAdaptor)
             val uc: CreatePrescription = CreatePrescriptionImpl(patientFacade, prescriberFacade, drugFacade)
-            newPrescriptionID = uc.addPrescription(prescriptionInfo!!)
+            newPrescriptionID = uc.createPrescription(prescriptionInfo!!)
         }
 
 

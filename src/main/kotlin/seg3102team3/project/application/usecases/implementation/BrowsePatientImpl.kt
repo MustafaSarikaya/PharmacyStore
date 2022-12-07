@@ -1,5 +1,6 @@
 package seg3102team3.project.application.usecases.implementation
 
+/* Commenting out until I find the use for this code
 import seg3102team3.project.application.dtos.queries.PatientDto
 import seg3102team3.project.application.dtos.queries.PrescriptionDto
 import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
@@ -118,4 +119,4 @@ class BrowsePatientImpl(private val patientFacade: PatientFacade): BrowsePatient
         )
         return prescFillDto
     }
-}
+}*/
