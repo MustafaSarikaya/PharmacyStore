@@ -74,6 +74,8 @@ class WebController(private val pharmacyService: PharmacyService) {
 
     @GetMapping(value = ["/auth/agent/createPrescription"])
     fun createPrescription(principal: Principal, model: Model, session: HttpSession): String{
+        val prescriptionForm = PrescriptionForm()
+        model.addAttribute("prescriptionData", prescriptionForm)
         return "createPrescription"
     }
 

@@ -2,12 +2,12 @@ package seg3102team3.project.infrastructure.web.forms
 
 class PrescriptionForm {
     var prescriberLicenceID: String = ""
-    var DIN: UInt = 0u
+    var DIN: Int = 0
     var originDate: String = ""
-    var drugDoseMg: Float = 0F
+    var drugDoseMg: Double = 0.0
     var adminMethod: String = ""
     var frequencyInstructions: String = ""
     var notes: String = ""
     var refillableStatus: String = ""
-    var refillCount: UShort = 0u
+    var refillCount: Int = 0
 }
