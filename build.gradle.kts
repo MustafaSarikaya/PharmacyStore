@@ -27,6 +27,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.security:spring-security-test")
+	implementation("org.mapstruct:mapstruct:1.5.0.Beta2")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.junit.platform:junit-platform-suite:1.8.2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

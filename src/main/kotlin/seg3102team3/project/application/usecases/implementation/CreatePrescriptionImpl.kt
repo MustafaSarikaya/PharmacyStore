@@ -36,7 +36,7 @@ class CreatePrescriptionImpl(
         return drugFacade.identifyDrugByDIN(identifier.toUInt())
     }
 
-    override fun createPrescription(prescriptionInfo: PrescriptionDto): UUID? {
+    override fun addPrescription(prescriptionInfo: PrescriptionDto): UUID? {
         var uuid: UUID? = patientFacade.addPrescription(prescriptionInfo)
         return uuid
     }
