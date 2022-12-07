@@ -6,6 +6,7 @@ import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
 import seg3102team3.project.application.services.DomainEventEmitter
 import seg3102team3.project.domain.patient.entities.PrescriptionFillStatus
 import seg3102team3.project.domain.patient.entities.Patient
+import seg3102team3.project.domain.patient.entities.Prescription
 import seg3102team3.project.domain.patient.entities.RefillableStatus
 import seg3102team3.project.domain.patient.events.*
 import seg3102team3.project.domain.patient.facade.PatientFacade
@@ -71,6 +72,17 @@ class PatientFacadeImpl (
         patientRepository.save(patient)
         eventEmitter.emit(PatientUpdated(patient.id, Date()))
         return true
+    }
+
+    override fun getPatient(patientId: String): Patient? {
+        val patient = patientRepository.find(patientId)
+        return patient
+    }
+
+    override fun getPrescription(prescriptionId: UUID): Prescription? {
+        var patient = patientRepository.findByPrescriptionID(prescriptionId)
+        var prescription = patient?.getPrescription(prescriptionId)
+        return prescription
     }
 
     override fun identifyPatientByName(name: String): String? {

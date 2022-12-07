@@ -7,5 +7,5 @@ interface CreatePrescription {
     fun verifyPatientInfo(identifier: String): String?
     fun verifyPrescriberInfo(identifier: String): String?
     fun verifyDrugInfo(identifier: String): UInt?
-    fun createPrescription(prescriptionInfo: PrescriptionDto): UUID?
+    fun addPrescription(prescriptionInfo: PrescriptionDto): UUID?
 }
