@@ -20,10 +20,12 @@ dependencies {
 	implementation("org.apache.pdfbox:pdfbox:2.0.1")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.security:spring-security-test")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.junit.platform:junit-platform-suite:1.8.2")
@@ -32,8 +34,6 @@ dependencies {
 	testImplementation("io.cucumber:cucumber-spring:7.3.3")
 	testImplementation("io.cucumber:cucumber-junit-platform-engine:7.3.3")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-	implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:14.0.0")
-	testImplementation("com.graphql-java-kickstart:graphql-spring-boot-starter-test:14.0.0")
 }
 
 tasks.withType<KotlinCompile> {

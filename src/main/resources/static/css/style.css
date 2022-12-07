@@ -127,3 +127,12 @@ h1 {
     padding: 0px;
 }
 
+label{
+    font-weight: bold;
+    padding-right: 1em;
+}
+
+input{
+    border-radius: 5px;
+    width: 10em;
+}

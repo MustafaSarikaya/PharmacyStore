@@ -21,7 +21,7 @@ class GenerateDrugReportImpl(
     private var agentFacade: AgentFacade, private var drugFacade: DrugFacade): GenerateDrugReport {
         
         override fun generateDrugReport(agentID: UUID, drugDIN: UInt, startDate: String, endDate: String, description: String): String? {
-            var output: String = ""
+            var output: String
             var document: Document = Document()
             var font: Font = FontFactory.getFont("Courier")
             var start: String = startDate.replace('/', '-')

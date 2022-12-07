@@ -9,12 +9,10 @@
   <img src="../../static/images/logo.png" width="200pt" alt="(logo)" th:src="@{/images/logo.png}"/>
   <span id="title" th:text="#{title.application}">UYP-PMS</span>
 
-  <a class="nav-link" href="../login.html" th:unless="${false}"
-       id="sign-up-btn" type="button"
+  <a class="nav-link" href="../login.html" th:unless="${false}" type="button"
        th:href="@{/register}">Create Account</a>
 
-    <a class="nav-link" href="../login.html" th:unless="${false}"
-       id="login-btn" type="button"
+    <a class="nav-link" href="../login.html" th:unless="${false}" type="button"
        th:href="@{/login}">Sign In</a>
 
     <!--<a class="nav-link" href="../account.html" sec:authorize="isAuthenticated"
