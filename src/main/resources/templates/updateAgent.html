@@ -14,4 +14,11 @@
             <h1 th:utext="#{updateAgent.title}">Title</h1>
         </div>
     </body>
+
+    <div th:switch="${updateAccountStatus}">
+        <span th:case="ok" th:text="#{account-update-ok-message}">OK</span>
+        <span th:case="error" th:text="#{account-update-error-message}">Error</span>
+    </div>
+
+    <div th:replace="~{fragments/account-form :: account-form(actionUrl='/auth/agent/updateAgent', actionBtn='form.update', canEditCredentials='false', canEditRole='false')}">    </div>
 </html>

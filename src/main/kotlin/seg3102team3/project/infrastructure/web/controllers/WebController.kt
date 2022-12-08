@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*
 import seg3102team3.project.application.dtos.queries.AgentDto
 import seg3102team3.project.infrastructure.web.forms.AgentForm
 import seg3102team3.project.infrastructure.web.forms.PatientForm
+import seg3102team3.project.infrastructure.web.forms.PrescriptionFillForm
 import seg3102team3.project.infrastructure.web.forms.PrescriptionForm
 import seg3102team3.project.infrastructure.web.services.PharmacyService
 import java.security.Principal
+import java.util.*
 import javax.servlet.http.HttpSession
 import javax.validation.Valid
 
@@ -75,11 +77,15 @@ class WebController(private val pharmacyService: PharmacyService) {
 
     @GetMapping(value = ["/auth/agent/createPrescription"])
     fun createPrescription(principal: Principal, model: Model, session: HttpSession): String{
+        val prescriptionForm = PrescriptionForm()
+        model.addAttribute("prescriptionData", prescriptionForm)
         return "createPrescription"
     }
 
     @GetMapping(value = ["/auth/agent/prepFill"])
     fun preparePrescriptionFill(principal: Principal, model: Model, session: HttpSession): String{
+        val fillForm = PrescriptionFillForm()
+        model.addAttribute("fillData", fillForm)
         return "prepFill"
     }
 
@@ -90,6 +96,8 @@ class WebController(private val pharmacyService: PharmacyService) {
 
     @GetMapping(value = ["/auth/agent/updateAgent"])
     fun updateAgent(principal: Principal, model: Model, session: HttpSession): String{
+        val accountData = AgentForm()
+        model.addAttribute("accountData", accountData)
         return "updateAgent"
     }
 

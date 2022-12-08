@@ -2,16 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}" />
-    <link href="../static/images/favicon.ico" rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}" />
+    <link href="../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="../static/images/favicon.ico" rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
     <title>Create Prescription • UYP-PMS</title>
 </head>
 
 <body>
-    <div th:replace="~{fragments/header :: header}">Header</div>
-    <div th:replace="~{fragments/menu :: menu}">Menu</div>
-    <div class="content">
-        <h1 th:utext="#{createPrescription.title}">Title</h1>
-    </div>
+<div th:replace="~{fragments/header :: header}">Header</div>
+<div th:replace="~{fragments/menu :: menu}">Menu</div>
+<div class="content">
+    <h1 th:utext="#{createPrescription.title}">Title</h1>
+</div>
+<!--Probably need to include a way to get patient ID-->
+<!--Also dont know if actionUrl is right-->
+<form id="create-prescription-form" action="#" th:object="${prescriptionData}" th:action="@{${actionUrl}}"
+      method="post">
+    <table>
+        <tr>
+            <td><label for="prescriberLicenceID" th:text="#{prescription.prescriberLicenceID}"></label></td>
+            <td>
+                <input id="prescriberLicenceID" type="text" placeholder="Enter prescriber's licence ID"
+                       name="prescriberLicenceID" th:field="*{prescriberLicenceID}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="DIN" th:text="#{prescription.DIN}"></label></td>
+            <td>
+                <input id="DIN" type="number" placeholder="Enter DIN"
+                       name="DIN" th:field="*{DIN}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="originDate" th:text="#{prescription.originDate}"></label></td>
+            <td>
+                <input id="originDate" type="text" placeholder="Enter origin date"
+                       name="originDate" th:field="*{originDate}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="drugDoseMg" th:text="#{prescription.drugDoseMg}"></label></td>
+            <td>
+                <input id="drugDoseMg" type="number" placeholder="Enter drug dosage in milligrams"
+                       name="drugDoseMg" th:field="*{drugDoseMg}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="adminMethod" th:text="#{prescription.adminMethod}"></label></td>
+            <td>
+                <input id="adminMethod" type="text" placeholder="Enter admin method"
+                       name="adminMethod" th:field="*{adminMethod}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="frequencyInstructions" th:text="#{prescription.frequencyInstructions}"></label></td>
+            <td>
+                <input id="frequencyInstructions" type="text" placeholder="Enter frequency instructions"
+                       name="frequencyInstructions" th:field="*{frequencyInstructions}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="notes" th:text="#{prescription.notes}"></label></td>
+            <td>
+                <input id="notes" type="text" placeholder="Enter notes"
+                       name="notes" th:field="*{notes}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="refillableStatus" th:text="#{prescription.refillableStatus}"></label></td>
+            <td>
+                <input id="refillableStatus" type="text" placeholder="Enter refillable status"
+                       name="refillableStatus" th:field="*{refillableStatus}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="refillCount" th:text="#{prescription.refillCount}"></label></td>
+            <td>
+                <input id="refillCount" type="number" placeholder="Enter refill count"
+                       name="refillCount" th:field="*{refillCount}"/>
+            </td>
+        </tr>
+    </table>
+    <button type="submit" name="filePrescription" th:text="#{prescription.filePrescription}">File Prescription</button>
+</form>
 </body>
 </html>
