@@ -9,6 +9,6 @@ import java.util.*
 @Component
 class PrescriptionFillFormDtoConverter{
     fun convertFormPrescriptionFill(prescriptionId: UUID, formData: PrescriptionFillForm): PrescriptionFillDto {
-        return PrescriptionFillDto(prescriptionId, formData.lotNumber, LocalDate.EPOCH)
+        return PrescriptionFillDto(prescriptionId, formData.lotNumber.toUInt(), LocalDate.EPOCH)
     }
 }

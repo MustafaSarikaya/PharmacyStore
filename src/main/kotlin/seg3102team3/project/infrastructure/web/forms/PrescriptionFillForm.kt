@@ -2,6 +2,6 @@ package seg3102team3.project.infrastructure.web.forms
 
 class PrescriptionFillForm {
     var prescriptionId: String = ""
-    var lotNumber: UInt = 0u
+    var lotNumber: Int = 0
     var expiryDate: String = ""
 }
