@@ -124,6 +124,8 @@ class WebController(private val pharmacyService: PharmacyService) {
 
     @GetMapping(value = ["/auth/pharmacist/updatePatient"])
     fun updatePatient(principal: Principal, model: Model, session: HttpSession): String{
+        val patientData = PatientForm()
+        model.addAttribute("patientData", patientData)
         return "updatePatient"
     }
 
