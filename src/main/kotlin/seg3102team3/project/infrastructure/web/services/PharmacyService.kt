@@ -9,6 +9,7 @@ import seg3102team3.project.application.dtos.queries.PrescriptionFillDto
 import seg3102team3.project.application.dtos.queries.converters.PrescriptionFillDtoConverter
 import seg3102team3.project.application.usecases.*
 import seg3102team3.project.domain.agent.entities.UserRole
+import seg3102team3.project.infrastructure.mongo.dao.PatientMongoRepository
 import seg3102team3.project.infrastructure.mongo.dao.UserMongoRepository
 import seg3102team3.project.infrastructure.web.forms.*
 import seg3102team3.project.infrastructure.web.forms.converters.AgentFormDtoConverter
@@ -19,6 +20,7 @@ import java.util.UUID
 
 @Service
 class PharmacyService(private val userRepository: UserMongoRepository,
+                      private val patientRepository: PatientMongoRepository,
                       private val accountConverter: AgentFormDtoConverter,
                       private val patientConverter: PatientFormDtoConverter,
                       private val prescriptionConverter: PrescriptionFormDtoConverter,
@@ -74,9 +76,10 @@ class PharmacyService(private val userRepository: UserMongoRepository,
         return updateAgent.updateAgent(agentId, accountConverter.convertFormAccount(agentForm))
     }
 
-    fun registerPatient(patientForm: PatientForm): String? {
+    fun registerPatient(patientForm: PatientForm): Boolean {
+        if(patientRepository.existsById(patientForm.phin)) return false
         val patient = patientConverter.convertFormPatient(patientForm)
-        return registerPatient.registerPatient(patient)
+        return registerPatient.registerPatient(patient) != null
     }
 
     fun updatePatient(patientId: String, patientForm: PatientForm): Boolean {

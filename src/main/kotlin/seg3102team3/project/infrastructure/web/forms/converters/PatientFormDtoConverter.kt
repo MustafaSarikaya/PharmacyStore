@@ -8,6 +8,10 @@ import java.time.LocalDate
 @Component
 class PatientFormDtoConverter{
     fun convertFormPatient(formData: PatientForm): PatientDto {
-        return PatientDto("","","","","","", LocalDate.EPOCH,"","",emptyArray(),emptyArray(),"")
+        return PatientDto(formData.phin,
+            formData.firstname + " " + if(formData.middlenames != null) formData.middlenames + " " else "" + formData.lastname,
+            "0, " + formData.streetName + ", " + formData.zipCode + ", " + formData.city + ", " + formData.province,
+            formData.email,formData.phoneNumber,formData.gender, LocalDate.EPOCH,formData.language,formData.healthHistoryNote,
+            emptyArray(), emptyArray(), formData.insuranceNumber)
     }
 }

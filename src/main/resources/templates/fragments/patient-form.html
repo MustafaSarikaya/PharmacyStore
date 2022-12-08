@@ -1,130 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <link
-            href="../../static/css/style.css"
-            rel="stylesheet"
-            th:href="@{/css/style.css}"
-    />
+    <meta charset="UTF-8">
+    <link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<div
-        class="patient-form"
-        th:fragment="patient-form(actionUrl, actionBtn, show)"
->
-    <form
-            id="patient-form"
-            action="#"
-            th:object="${patientData}"
-            th:action="@{${actionUrl}}"
-            method="post"
-    >
+<div th:fragment="patient-form(actionUrl, actionBtn, show)">
+    <form id="patient-form" action="#" th:object="${patientData}" th:action="@{${actionUrl}}" method="post">
+
         <table>
             <tr>
-                <td><label for="fname" th:text="#{form.firstname}"></label></td>
-                <td>
-                    <input
-                            id="fname"
-                            type="text"
-                            placeholder="Enter your first name"
-                            name="fname"
-                            th:field="*{firstname}"
-                    />
-                </td>
+                <td><label for="phin" th:text="#{form.phin}"></label></td>
+                <td><input id="phin" type="text" placeholder="Enter patient PHIN" name="phin" th:field="*{phin}"/></td>
+                <div th:if="${#fields.hasErrors('phin')}" th:errors="*{phin}">Error</div>
             </tr>
             <tr>
-                <td>
-                    <label for="mnames" th:text="#{form.middlenames}"></label>
-                </td>
-                <td>
-                    <input
-                            id="mnames"
-                            type="text"
-                            placeholder="Enter your middle name(s)"
-                            name="mnames"
-                            th:field="*{middlenames}"
-                    />
-                </td>
+                <td><label for="fname" th:text="#{form.firstname}"></label></td>
+                <td><input id="fname" type="text" placeholder="Enter patient first name" name="fname" th:field="*{firstname}"/></td>
+                <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Error</div>
+            </tr>
+            <tr>
+                <td><label for="mnames" th:text="#{form.middlenames}"></label></td>
+                <td><input id="mnames" type="text" placeholder="Enter patient middle name(s)" name="mnames" th:field="*{middlenames}"/></td>
             </tr>
             <tr>
                 <td><label for="lname" th:text="#{form.lastname}"></label></td>
+                <td><input id="lname" type="text" placeholder="Enter patient last name" name="lname" th:field="*{lastname}"/></td>
+                <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Error</div>
+            </tr>
+            <tr>
+                <td><label for="insuranceNumber" th:text="#{patient.insuranceNumber}"></label></td>
+                <td><input id="insuranceNumber" class="form-control" type="text" placeholder="Enter patient's insurance number"
+                           name="insuranceNumber" th:field="*{insuranceNumber}"/></td>
+            </tr>
+            <tr>
+                <td><label for="dateOfBirth" th:text="#{patient.dateOfBirth}"></label></td>
+                <td><input id="dateOfBirth" class="form-control" type="text" placeholder="Enter Patient's BirthDate" name="dateOfBirth" th:field="*{dateOfBirth}"/></td>
+            </tr>
+            <tr>
+                <td><label for="phoneNumber" th:text="#{patient.phoneNumber}"><b></b></label></td>
                 <td>
-                    <input
-                            id="lname"
-                            type="text"
-                            placeholder="Enter your last name"
-                            name="lname"
-                            th:field="*{lastname}"
-                    />
+                    <input id="phoneNumber" class="form-control" type="text" placeholder="Enter Patient's Phone Number"
+                           name="phoneNumber" th:field="*{phoneNumber}"/>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label for="insuranceNumber" th:text="#{patient.insuranceNumber}">
-                    </label>
-                </td>
-                <td>
-                    <input
-                            id="insuranceNumber"
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter Patient's Insurance Number"
-                            name="insuranceNumber"
-                            th:field="*{insuranceNumber}"
-                    />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="dateOfBirth" th:text="#{patient.dateOfBirth}"
-                    ><b></b>
-                    </label>
-                </td>
-                <td>
-                    <input
-                            id="dateOfBirth"
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter Patient's BirthDate"
-                            name="dateOfBirth"
-                            th:field="*{dateOfBirth}"
-                    />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="phoneNumber" th:text="#{patient.phoneNumber}"
-                    ><b></b
-                    ></label>
-                </td>
-                <td>
-                    <input
-                            id="phoneNumber"
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter Patient's Phone Number"
-                            name="phoneNumber"
-                            th:field="*{phoneNumber}"
-                    />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="gender" th:text="#{form.gender}"><b></b></label>
-                </td>
+                <td><label for="gender" th:text="#{form.gender}"><b></b></label></td>
                 <td>
                     <select id="gender" name="gender" th:field="*{gender}">
-                        <option value="male" th:text="#{form.gender.male}">Male</option>
-                        <option value="female" th:text="#{form.gender.female}">
-                            Female
-                        </option>
-                        <option value="other" th:text="#{form.gender.other}">
-                            Other
-                        </option>
-                        <option value="rns" th:text="#{form.gender.rns}">
-                            Rather Not Say
-                        </option>
+                        <option value="MALE" th:text="#{form.gender.male}">Male</option>
+                        <option value="FEMALE" th:text="#{form.gender.female}">Female</option>
+                        <option value="OTHER" th:text="#{form.gender.other}">Other</option>
+                        <option value="RATHER_NOT_SAY" th:text="#{form.gender.rns}">Rather Not Say</option>
                     </select>
                 </td>
             </tr>
@@ -134,158 +61,77 @@
                 </td>
                 <td>
                     <select id="language" name="language" th:field="*{language}">
-                        <option value="en" th:text="#{form.language.en}">
-                            English
-                        </option>
-                        <option value="fr" th:text="#{form.language.fr}">French</option>
-                        <option value="sp" th:text="#{form.language.sp}">
-                            Spanish
-                        </option>
-                        <option value="ar" th:text="#{form.language.ar}">Arabic</option>
-                        <option value="ru" th:text="#{form.language.ru}">
-                            Russian
-                        </option>
-                        <option value="pg" th:text="#{form.language.pg}">
-                            Portuguese
-                        </option>
-                        <option value="de" th:text="#{form.language.de}">German</option>
-                        <option value="jp" th:text="#{form.language.jp}">
-                            Japanese
-                        </option>
-                        <option value="cn" th:text="#{form.language.cn}">
-                            Chinese
-                        </option>
-                        <option value="it" th:text="#{form.language.it}">
-                            Italian
-                        </option>
-                        <option value="sk" th:text="#{form.language.sk}">Korean</option>
+                        <option value="ENGLISH" th:text="#{form.language.en}">English</option>
+                        <option value="FRENCH" th:text="#{form.language.fr}">French</option>
+                        <option value="SPANISH" th:text="#{form.language.sp}">Spanish</option>
+                        <option value="ARABIC" th:text="#{form.language.ar}">Arabic</option>
+                        <option value="RUSSIAN" th:text="#{form.language.ru}">Russian</option>
+                        <option value="PORTUGUESE" th:text="#{form.language.pg}">Portuguese</option>
+                        <option value="GERMAN" th:text="#{form.language.de}">German</option>
+                        <option value="JAPANESE" th:text="#{form.language.jp}">Japanese</option>
+                        <option value="CHINESE" th:text="#{form.language.cn}">Chinese</option>
+                        <option value="ITALIAN" th:text="#{form.language.it}">Italian</option>
+                        <option value="KOREAN" th:text="#{form.language.sk}">Korean</option>
                     </select>
                 </td>
             </tr>
             <tr>
+                <td><label for="houseNumber" th:text="#{patient.houseNumber}"><b></b></label></td>
+                <td><input id="houseNumber" class="form-control" type="text" placeholder="Enter Patient House Number" name="houseNumber" th:field="*{houseNumber}"/></td>
+                <div th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}">Error</div>
+            </tr>
+            <tr>
+                <td><label for="streetName" th:text="#{patient.streetName}"><b></b></label></td>
+                <td><input id="streetName" class="form-control" type="text" placeholder="Enter Patient Street Name" name="streetName" th:field="*{streetName}"/></td>
+                <div th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}">Error</div>
+            </tr>
+            <tr>
+                <td><label for="zipCode" th:text="#{patient.zipCode}"><b></b></label></td>
+                <td><input id="zipCode" class="form-control" type="text" placeholder="Enter Patient Zip Code" name="zipCode" th:field="*{zipCode}"/></td>
+                <div th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}">Error</div>
+            </tr>
+            <tr>
+                <td><label for="city" th:text="#{patient.city}"><b></b></label></td>
+                <td><input id="city" class="form-control" type="text" placeholder="Enter Patient City" name="city}" th:field="*{city}"/></td>
+                <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Error</div>
+            </tr>
+            <tr>
+                <td><label for="province" th:text="#{patient.province}"><b></b></label></td>
+                <td><input id="province" class="form-control" type="text" placeholder="Enter Patient Province" name="province" th:field="*{province}"/></td>
+                <div th:if="${#fields.hasErrors('province')}" th:errors="*{province}">Error</div>
+            </tr>
+            <tr>
+                <td><label for="email" th:text="#{form.email}"><b></b></label></td>
                 <td>
-                    <label for="address" th:text="#{patient.address}"><b></b></label>
-                </td>
-                <td>
-                    <input
-                            id="address"
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter Patient Address"
-                            name="address"
-                            th:field="*{address}"
-                    />
+                    <input id="email" class="form-control" type="email" placeholder="Enter Patient Email" name="email" th:field="*{email}"/>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
                 </td>
             </tr>
             <tr>
+                <td><label for="prescriptionMeds" th:text="#{patient.prescriptionMeds}"><b></b></label></td>
                 <td>
-                    <label for="email" th:text="#{form.email}"><b></b></label>
-                </td>
-                <td>
-                    <input
-                            id="email"
-                            class="form-control"
-                            type="email"
-                            placeholder="Enter Patient Email"
-                            name="email"
-                            th:field="*{email}"
-                    />
-                    <div
-                            class="alert alert-danger"
-                            role="alert"
-                            th:if="${#fields.hasErrors('email')}"
-                            th:errors="*{email}"
-                    >
-                        Error
-                    </div>
+                    <input id="prescriptionMeds" class="form-control" type="text" placeholder="Enter Patient Prescription Medication"
+                           name="prescriptionMeds" th:field="*{prescriptionMeds}"/>
                 </td>
             </tr>
             <tr>
+                <td><label for="nonPrescriptionMeds" th:text="#{patient.nonPrescriptionMeds}"><b></b></label></td>
                 <td>
-                    <label
-                            for="prescriptionMeds"
-                            th:text="#{patient.prescriptionMeds}"
-                    ><b></b
-                    ></label>
-                </td>
-                <td>
-                    <input
-                            id="prescriptionMeds"
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter Patient Prescription Medication"
-                            name="prescriptionMeds"
-                            th:field="*{prescriptionMeds}"
-                    />
+                    <input id="nonPrescriptionMeds" class="form-control" type="text" placeholder="Enter Patient Non Prescription Medication"
+                           name="nonPrescriptionMeds" th:field="*{nonPrescriptionMeds}"/>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label
-                            for="nonPrescriptionMeds"
-                            th:text="#{patient.nonPrescriptionMeds}"
-                    ><b></b
-                    ></label>
+                <td><label for="healthHistoryNote" th:text="#{patient.healthHistoryNote}"><b></b></label>
                 </td>
                 <td>
-                    <input
-                            id="nonPrescriptionMeds"
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter Patient Non Prescription Medication"
-                            name="nonPrescriptionMeds"
-                            th:field="*{nonPrescriptionMeds}"
-                    />
+                    <input id="healthHistoryNote" class="form-control" type="text" placeholder="Enter Patient Health History Notes"
+                           name="healthHistoryNote" th:field="*{healthHistoryNote}"/>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <label
-                            for="healthHistoryNote"
-                            th:text="#{patient.healthHistoryNote}"
-                    ><b></b
-                    ></label>
-                </td>
-                <td>
-                    <input
-                            id="healthHistoryNote"
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter Patient Health History Notes"
-                            name="healthHistoryNote"
-                            th:field="*{healthHistoryNote}"
-                    />
-                </td>
-            </tr>
-
-            <!--        <div class="alert alert-danger" role="alert"
-                       th:if="${#fields.hasErrors('number') || #fields.hasErrors('expirationMonth') ||
-                              #fields.hasErrors('expirationYear') || #fields.hasErrors('patientFirstname') ||
-                              #fields.hasErrors('patientLastname') || #fields.hasErrors('street') ||
-                              #fields.hasErrors('city') || #fields.hasErrors('country') ||
-                              #fields.hasErrors('postalCode')}"
-                          th:text="#{credit-card-errors}">
-                      Error
-                  </div>-->
-
-            <!--       <div class="alert alert-danger" role="alert"
-                      th:if="${ccardErrors}"
-                      th:text="#{credit-card-errors}">
-                     Error
-                 </div>-->
-
-            <!--        <div th:replace="~{fragments/new-prescription ::new-prescription}">Add Prescription To Patient</div>-->
         </table>
-        <div>
-            <button
-                    type="submit"
-                    class="btn btn-primary"
-                    name="registerPatient"
-                    th:text="#{${actionBtn}}"
-            >
-                Submit
-            </button>
-        </div>
+
+        <br><button type="submit" name="registerPatient" th:text="#{${actionBtn}}">Submit</button>
     </form>
 </div>
 </body>

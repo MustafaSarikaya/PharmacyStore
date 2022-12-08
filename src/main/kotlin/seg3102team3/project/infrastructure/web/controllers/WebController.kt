@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import seg3102team3.project.application.dtos.queries.AgentDto
 import seg3102team3.project.infrastructure.web.forms.AgentForm
+import seg3102team3.project.infrastructure.web.forms.PatientForm
 import seg3102team3.project.infrastructure.web.forms.PrescriptionForm
 import seg3102team3.project.infrastructure.web.services.PharmacyService
 import java.security.Principal
@@ -94,6 +95,22 @@ class WebController(private val pharmacyService: PharmacyService) {
 
     @GetMapping(value = ["/auth/pharmacist/createPatient"])
     fun createPatient(principal: Principal, model: Model, session: HttpSession): String{
+        val patientData = PatientForm()
+        model.addAttribute("patientData", patientData)
+        return "createPatient"
+    }
+
+    @PostMapping(value = ["/auth/pharmacist/createPatient"])
+    fun postPatient(@Valid @ModelAttribute("patientData") patientData: PatientForm, bindingResults: BindingResult, model: Model, session: HttpSession): String {
+        model.addAttribute("patientData", patientData)
+        if(!bindingResults.hasErrors()){
+            if(pharmacyService.registerPatient(patientData) != null){
+                model.addAttribute("createPatientStatus", "ok")
+                model.addAttribute("patientData", PatientForm())
+            } else {
+                model.addAttribute("createPatientStatus", "error")
+            }
+        }
         return "createPatient"
     }
 
